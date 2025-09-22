@@ -1,0 +1,53 @@
+
+:root {
+  --main-bg-color: #f0f2f5; /* Fond principal légèrement gris */
+  --sidebar-bg-color: #ffffff; /* Fond de la barre latérale blanc */
+  --header-bg-color: #ffffff; /* Fond de l'en-tête blanc */
+  --text-color: #333333; /* Couleur du texte principal */
+  --link-color: #0056b3; /* Couleur des liens */
+  --border-color: #dee2e6; /* Couleur des bordures */
+  --shadow-color: rgba(0, 0, 0, 0.1); /* Couleur de l'ombre */
+
+  --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  background-color: var(--main-bg-color);
+  color: var(--text-color);
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-layout {
+  display: flex;
+  flex: 1;
+}
+
+.content-area {
+  flex: 1;
+  padding: 2rem;
+  background-color: #ffffff;
+  margin: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+/* Styles pour les liens */
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+
