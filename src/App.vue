@@ -17,16 +17,7 @@ function updateSelectedSubject(subject) {
 }
 </script>
 
-<style>
-/* Reset global et style de base */
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background-color: #fff;
-  color: #333;
-}
-
+<style scoped>
 #app-layout {
   display: flex;
   height: 100vh;

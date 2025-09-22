@@ -14,8 +14,8 @@
       </p>
     </div>
     <div v-else>
-      <h1>Bienvenue</h1>
-      <p>Veuillez sélectionner une matière dans la barre latérale.</p>
+      <h1>Bienvenue sur la plateforme pédagogique</h1>
+      <p>Sélectionnez une matière dans le menu de gauche pour afficher les ressources correspondantes.</p>
     </div>
   </main>
 </template>
@@ -28,14 +28,18 @@ defineProps({
 
 <style scoped>
 .content-display {
-  padding: 20px 40px;
+  padding: 30px 50px;
   flex: 1;
+  background-color: #ffffff;
 }
 
 h1 {
   margin-top: 0;
-  border-bottom: 2px solid #eee;
-  padding-bottom: 10px;
+  font-size: 2.5rem;
+  border-bottom: 3px solid #f0f0f0;
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+  color: #343a40;
 }
 
 ul {
@@ -43,10 +47,22 @@ ul {
   padding: 0;
 }
 
+li {
+  margin-bottom: 12px;
+}
+
 li a {
-  display: inline-block;
-  padding: 5px 0;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+li a:hover {
   text-decoration: underline;
-  color: #0000ee;
+}
+
+p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #6c757d;
 }
 </style>
