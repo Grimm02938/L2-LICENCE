@@ -22,6 +22,9 @@ dist-ssr
 # Local deployment scripts with sensitive tokens
 deploy-local.bat
 deploy-local.sh
+
+# Firebase local state/cache (should not be committed)
+.firebase/
 *.ntvs*
 *.njsproj
 *.sln
