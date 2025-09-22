@@ -1,41 +1,36 @@
-
 # L2-LICENCE
 
 ## Overview
 
-Site destiné aux élèves de L2 MATHS Paris Saclay, inspiré par le design et l'organisation de `vb.webprepa.eu`. Le site fournira les cours, TDs, TDs corrigés, et examens pour les matières principales : Arithmétique, Algèbre linéaire, Analyse, Topologie.
+Site destiné aux élèves de L2 MATHS Paris Saclay, strictement inspiré par le design sobre et l'organisation de `vb.webprepa.eu`. Le site fournira les cours, TDs, TDs corrigés, et examens pour les matières principales.
 
-## Features & Design
+## Features & Design (Version 2 - Refonte)
 
-- **Navigation :** Barre latérale fixe avec la liste des matières.
-- **Contenu :** Zone principale affichant les listes de documents (PDF, etc.).
-- **Style :** Design sobre, académique et fonctionnel, similaire au site de référence.
-- **Données :** Contenu géré via un fichier de données interne pour une mise à jour facile.
+- **Layout :** Structure simple à deux colonnes.
+- **Navigation :** Barre latérale fixe à gauche listant les matières. Un clic sur une matière met à jour la vue principale.
+- **Contenu :** Zone principale à droite affichant les listes de documents (PDFs, etc.) pour la matière sélectionnée.
+- **Style :** Design sobre, académique et fonctionnel, imitant `vb.webprepa.eu`. Couleurs neutres, typographie simple et lisible. Aucune animation ou effet superflu.
+- **Données :** Contenu entièrement géré via un fichier de données interne (`src/data/subjects.ts`) pour une mise à jour facile et centralisée.
 
-## Plan de Développement
+## Plan de Développement (Tâche Actuelle)
 
-1.  **Structure et Composants de Base :**
-    *   Créer une barre de navigation (`Sidebar.vue`).
-    *   Créer un composant pour afficher le contenu (`ContentDisplay.vue`).
-    *   Mettre en place la disposition principale dans `App.vue`.
+**Objectif : Abandonner le design actuel et reconstruire le site pour qu'il soit une réplique fonctionnelle de `vb.webprepa.eu`.**
 
-2.  **Mise en Page et Style (CSS) :**
-    *   Appliquer le style pour imiter le site de référence.
+1.  **Nettoyage du Projet :**
+    *   Supprimer les composants existants (`Header.vue`, `Hero.vue`, etc.) qui ne font pas partie du nouveau design.
+    *   Supprimer les styles CSS complexes et inutiles.
 
-3.  **Gestion des Données :**
-    *   Créer un fichier `subjects.ts` pour stocker la liste des matières et des documents.
+2.  **Création de la Source de Données :**
+    *   Créer le fichier `src/data/subjects.ts` qui exportera un tableau de données contenant la structure des cours.
 
-4.  **Affichage Dynamique :**
-    *   Connecter la barre de navigation à l'affichage du contenu.
+3.  **Création des Nouveaux Composants :**
+    *   Créer `src/components/Sidebar.vue`.
+    *   Créer `src/components/ContentDisplay.vue`.
 
-5.  **Hébergement (Déploiement) :**
-    *   Déployer sur Firebase Hosting une fois la version 1 prête.
+4.  **Assemblage et Style Final :**
+    *   Réécrire entièrement `src/App.vue` pour importer les nouveaux composants et gérer la logique d'affichage.
+    *   Créer une nouvelle feuille de style (`src/assets/main.css`) avec le style minimaliste requis.
+    *   Lier la nouvelle feuille de style dans `index.html`.
 
-## Tâche Actuelle
-
-**Étape 2 : Refonte du design pour imiter `vb.webprepa.eu`.**
-- Création d'une feuille de style globale `src/styles.css`.
-- Mise à jour de `index.html` pour lier la nouvelle feuille de style.
-- Refonte de `App.vue` avec une nouvelle structure (header, main, footer).
-- Création des composants `Header.vue`, `Sidebar.vue`, et `ContentDisplay.vue`.
-- Intégration des composants dans `App.vue`.
+5.  **Déploiement :**
+    *   Construire et déployer la nouvelle version sur GitHub Pages.
