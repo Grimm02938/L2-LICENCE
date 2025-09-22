@@ -18,6 +18,10 @@ dist-ssr
 .idea
 .DS_Store
 *.suo
+
+# Local deployment scripts with sensitive tokens
+deploy-local.bat
+deploy-local.sh
 *.ntvs*
 *.njsproj
 *.sln
