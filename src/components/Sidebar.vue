@@ -1,42 +1,62 @@
-
 <template>
   <aside class="sidebar">
     <nav>
       <ul>
-        <li><a href="#">Arithmétique</a></li>
-        <li><a href="#">Algèbre linéaire</a></li>
-        <li><a href="#">Analyse</a></li>
-        <li><a href="#">Topologie</a></li>
+        <li v-for="subject in subjects" :key="subject.name">
+          <a href="#" @click.prevent="selectSubject(subject)" :class="{ 'active': selectedSubject && selectedSubject.name === subject.name }">
+            {{ subject.name }}
+          </a>
+        </li>
       </ul>
     </nav>
   </aside>
 </template>
 
+<script setup>
+import { subjects } from '../data/subjects';
+
+defineProps({
+  selectedSubject: Object,
+});
+
+const emit = defineEmits(['subject-selected']);
+
+function selectSubject(subject) {
+  emit('subject-selected', subject);
+}
+</script>
+
 <style scoped>
 .sidebar {
-  width: 250px;
-  background-color: var(--sidebar-bg-color);
-  padding: 1rem;
-  border-right: 1px solid var(--border-color);
-  box-shadow: 2px 0 5px var(--shadow-color);
+  width: 280px;
+  background-color: #f8f9fa;
+  padding: 25px;
+  border-right: 1px solid #dee2e6;
+  overflow-y: auto;
 }
 
 ul {
-  list-style: none;
+  list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
 li a {
   display: block;
-  padding: 0.75rem 1.25rem;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #495057;
   border-radius: 5px;
-  color: var(--text-color);
-  font-weight: 500;
+  transition: background-color 0.2s;
 }
 
 li a:hover {
-  background-color: var(--main-bg-color);
+  background-color: #e9ecef;
   text-decoration: none;
+}
+
+li a.active {
+  background-color: #007bff;
+  color: #fff;
 }
 </style>
