@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Environment variables (do not commit secrets)
+.env
+.env.*
+!.env.example
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -19,7 +24,9 @@ dist-ssr
 .DS_Store
 *.suo
 
-# Local deployment scripts with sensitive tokens
+# Firebase local cache and auth state
+.firebase/
+firebase-debug.log
 deploy-local.bat
 deploy-local.sh
 

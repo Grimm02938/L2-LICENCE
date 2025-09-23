@@ -1,6 +1,6 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+// Firebase initialization (idempotent) and browser-safe Analytics
+import { initializeApp, getApp, getApps } from "firebase/app";
+import { getAnalytics, isSupported as analyticsIsSupported, type Analytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -16,8 +16,22 @@ const firebaseConfig = {
   measurementId: "G-YY4BTF0V41"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// Initialize Firebase (avoid duplicate app during HMR)
+const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+
+// Initialize Analytics only in the browser and when supported
+let analytics: Analytics | undefined;
+if (typeof window !== "undefined") {
+  // Best-effort: don't block app startup if Analytics isn't supported
+  analyticsIsSupported()
+    .then((supported) => {
+      if (supported) {
+        analytics = getAnalytics(app);
+      }
+    })
+    .catch(() => {
+      // ignore analytics initialization errors
+    });
+}
 
 export { app, analytics };
