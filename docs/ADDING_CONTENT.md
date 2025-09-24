@@ -47,6 +47,8 @@ sections: {
 
 La puce « Ouvrir » apparaîtra automatiquement pour chaque ressource dont l'URL est définie.
 
+> ℹ️ Tous les chapitres sont désormais pré-remplis avec des libellés « à venir » pour les TD et DS. Cela permet de visualiser immédiatement les emplacements disponibles. Il vous suffit de remplacer `label` et `url` par vos propres documents quand ils sont prêts.
+
 ## 3. Ajouter ou réordonner des chapitres
 
 - Pour ajouter un chapitre, insérez un nouvel objet dans le tableau correspondant à la matière (`contentBySubject['analyse']`, etc.).
@@ -69,6 +71,13 @@ python scripts/split_pdf.py --input cours-analyse.pdf --ranges "1-24:chapitre-01
 ```
 
 Chaque intervalle `start-end:title` génère un PDF nommé `title.pdf` dans le dossier `output/`. Vous pouvez ensuite déplacer ces fichiers dans `public/docs/...` puis mettre à jour `content.ts`.
+
+### Exemple pratique : `ndc_v0.pdf` et « Cours Topologie »
+
+- `ndc_v0.pdf` : découpez chaque partie (chapitres 1, 2, ...) en autant de fichiers que nécessaire et renommez-les selon la convention `chapitre-0X-nom.pdf` avant de les copier dans `public/docs/arithmetique/`.
+- `Cours_Topologie_OLMA203E_2024.pdf` : répétez l'opération pour obtenir des fichiers `chapitre-0X-*.pdf` et placez-les dans `public/docs/topologie/`.
+
+Les clés correspondantes existent déjà dans `content.ts`. Remplacez simplement les valeurs d'URL pour que les liens pointent vers vos nouveaux PDF splités.
 
 ## 6. Déployer les modifications
 

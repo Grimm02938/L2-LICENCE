@@ -58,7 +58,7 @@ const sample = `[
 
     <div v-else class="placeholder">
       <p>
-        Ajoutez vos créneaux dans <code>src/components/ScheduleBoard.vue</code> ou injected data depuis une API.
+        Ajoutez vos créneaux dans <code>src/shared/data/schedule.ts</code> ou injectez-les depuis une API.
         Structure attendue :
       </p>
       <pre><code>{{ sample }}</code></pre>

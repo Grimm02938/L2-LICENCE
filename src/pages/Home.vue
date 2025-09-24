@@ -1,18 +1,9 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import CollapsiblePanel from '../shared/CollapsiblePanel.vue'
-import ScheduleBoard from '../components/ScheduleBoard.vue'
 import { subjects } from '../shared/data/subjects'
 
 const router = useRouter()
-
-type ScheduleEntry = {
-	day: string
-	slots: { time: string; title: string; room?: string; teacher?: string }[]
-}
-
-// En attente de l'emploi du temps officiel : remplissez ce tableau pour activer l'affichage.
-const schedulePreview: ScheduleEntry[] = []
 
 function goToSubject(slug: string) {
 	router.push({ name: 'subject', params: { slug } })
@@ -21,9 +12,7 @@ function goToSubject(slug: string) {
 
 <template>
 	<div class="home">
-		<ScheduleBoard :entries="schedulePreview" />
-
-		<section>
+		<section id="courses">
 		<h1>Matières</h1>
 		<div class="panels">
 			<CollapsiblePanel

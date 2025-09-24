@@ -39,8 +39,6 @@ watch(isMenuOpen, (open) => {
           <div class="nav-links">
             <a href="#" class="nav-link active" @click="closeMenu">Accueil</a>
             <a href="#courses" class="nav-link" @click="closeMenu">Cours</a>
-            <a href="#schedule" class="nav-link" @click="closeMenu">Emploi du temps</a>
-            <a href="#resources" class="nav-link" @click="closeMenu">Ressources</a>
           </div>
         </div>
       </nav>

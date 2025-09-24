@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { subjects } from '../shared/data/subjects'
 import { contentBySubject } from '../shared/data/content'
+import type { Chapter } from '../shared/data/content'
 import Icon from '../shared/Icon.vue'
 import CollapsiblePanel from '../shared/CollapsiblePanel.vue'
 
@@ -11,6 +12,25 @@ const slug = computed(() => String(route.params.slug || ''))
 const subject = computed(() => subjects.find(s => s.slug === slug.value))
 
 const chapters = computed(() => contentBySubject[slug.value] || [])
+
+const resourceMeta = [
+	{ key: 'cours', label: 'Cours :' },
+	{ key: 'td', label: 'TD :' },
+	{ key: 'tdCorrige', label: 'TD (Correction) :' },
+	{ key: 'ds', label: 'DS :' },
+	{ key: 'dsCorrige', label: 'DS (Correction) :' },
+] satisfies { key: keyof Chapter['sections']; label: string }[]
+
+type ResourceKey = (typeof resourceMeta)[number]['key']
+
+function visibleSections(chapter: Chapter) {
+	return resourceMeta
+		.map(meta => ({ meta, section: chapter.sections[meta.key] }))
+		.filter((entry): entry is {
+			meta: (typeof resourceMeta)[number]
+			section: NonNullable<Chapter['sections'][ResourceKey]>
+		} => Boolean(entry.section))
+}
 </script>
 
 <template>
@@ -31,25 +51,18 @@ const chapters = computed(() => contentBySubject[slug.value] || [])
 				:accent-rgb="subject.accentRgb"
 			>
 				<div class="rows">
-					<div class="row" v-if="ch.sections.cours">
-						<span class="label">Cours :</span>
-						<a class="chip" :href="ch.sections.cours.url" target="_blank" rel="noopener">{{ ch.sections.cours.label || 'Ouvrir' }}</a>
-					</div>
-					<div class="row" v-if="ch.sections.td">
-						<span class="label">TD :</span>
-						<a class="chip" :href="ch.sections.td.url" target="_blank" rel="noopener">{{ ch.sections.td.label || 'Ouvrir' }}</a>
-					</div>
-					<div class="row" v-if="ch.sections.tdCorrige">
-						<span class="label">TD (Correction) :</span>
-						<a class="chip" :href="ch.sections.tdCorrige.url" target="_blank" rel="noopener">{{ ch.sections.tdCorrige.label || 'Ouvrir' }}</a>
-					</div>
-					<div class="row" v-if="ch.sections.ds">
-						<span class="label">DS :</span>
-						<a class="chip" :href="ch.sections.ds.url" target="_blank" rel="noopener">{{ ch.sections.ds.label || 'Ouvrir' }}</a>
-					</div>
-					<div class="row" v-if="ch.sections.dsCorrige">
-						<span class="label">DS (Correction) :</span>
-						<a class="chip" :href="ch.sections.dsCorrige.url" target="_blank" rel="noopener">{{ ch.sections.dsCorrige.label || 'Ouvrir' }}</a>
+					<div class="row" v-for="item in visibleSections(ch)" :key="item.meta.key">
+						<span class="label">{{ item.meta.label }}</span>
+						<a
+							v-if="item.section.url"
+							class="chip"
+							:href="item.section.url"
+							target="_blank"
+							rel="noopener"
+						>
+							{{ item.section.label || 'Ouvrir' }}
+						</a>
+						<span v-else class="chip placeholder">{{ item.section.label || 'À venir' }}</span>
 					</div>
 				</div>
 			</CollapsiblePanel>
@@ -72,6 +85,7 @@ const chapters = computed(() => contentBySubject[slug.value] || [])
 .chip { display:inline-flex; align-items:center; justify-content:flex-start; padding: .18rem .55rem; border-radius: 999px; border:1px solid rgba(var(--accent-color), .45); background: rgba(var(--accent-color), .14); color: rgb(var(--accent-color)); font-weight:700; font-size:.85rem; letter-spacing:.01em }
 .chip:hover { background: rgba(var(--accent-color), .2) }
 .chip:focus-visible { outline: 2px solid rgba(var(--accent-color), .6); outline-offset: 2px }
+.chip.placeholder { border-style: dashed; background: rgba(var(--accent-color), .08); color: var(--text-secondary); pointer-events: none; }
 
 @media (max-width: 600px) {
 	.row { grid-template-columns: 1fr; justify-items:flex-start; row-gap:.2rem; }

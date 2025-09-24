@@ -22,28 +22,13 @@ const updates = [
   },
 ]
 
-const quickActions = [
-  {
-    label: 'Guide ajout de contenus',
-    description: 'Tutoriel pour lier cours, TD, DS',
-    href: 'https://github.com/Grimm02938/L2-LICENCE/blob/main/docs/ADDING_CONTENT.md',
-  },
-  {
-    label: 'Script découpe PDF',
-    description: 'Automatiser la séparation en chapitres',
-    href: 'https://github.com/Grimm02938/L2-LICENCE/blob/main/scripts/split_pdf.py',
-  },
-  {
-    label: 'Boîte à idées',
-    description: 'Proposer une évolution',
-    href: 'https://github.com/Grimm02938/L2-LICENCE/issues/new',
-  },
-]
-
 const contact = reactive({ email: '', subject: '', message: '' })
 const status = ref('')
+const journalOpen = ref(false)
 
-const canSend = computed(() => contact.subject.trim().length > 0 && contact.message.trim().length > 4)
+const canSend = computed(
+  () => contact.email.trim().length > 0 && contact.subject.trim().length > 0 && contact.message.trim().length > 4,
+)
 const encoded = 'YWRhbWUuYWJkZWxtb3VsYUB1bml2ZXJzaXRlLXBhcmlzLXNhY2xheS5mcg=='
 
 function decodeRecipient() {
@@ -63,52 +48,55 @@ function sendContact() {
   if (!target) return
   const params = new URLSearchParams({
     subject: contact.subject.trim(),
-    body: `Expéditeur : ${contact.email || 'non précisé'}\n\n${contact.message}`,
+    body: `Expéditeur : ${contact.email}\n\n${contact.message}`,
   })
   window.location.href = `mailto:${target}?${params.toString()}`
-  status.value = 'Message prêt dans votre messagerie.'
+  status.value = 'Message prêt dans votre messagerie. L’envoi direct sera ajouté ultérieurement.'
   resetForm()
-  window.setTimeout(() => (status.value = ''), 3200)
+  window.setTimeout(() => (status.value = ''), 3600)
+}
+
+function toggleJournal() {
+  journalOpen.value = !journalOpen.value
 }
 </script>
 
 <template>
-  <aside class="sidebar" aria-label="Outils de la plateforme">
-    <section class="card timeline">
-      <header>Journal de bord</header>
-      <ol>
-        <li v-for="item in updates" :key="item.version">
-          <div class="line"></div>
-          <div class="meta">
-            <span class="badge">{{ item.version }}</span>
-            <span class="date">{{ item.date }}</span>
-          </div>
-          <p class="note">{{ item.note }}</p>
-          <ul class="tags">
-            <li v-for="tag in item.tags" :key="tag">{{ tag }}</li>
-          </ul>
-        </li>
-      </ol>
-    </section>
+  <aside class="sidebar" aria-label="Journal et outils">
+    <button class="journal-toggle" type="button" @click="toggleJournal">
+      <span>Journal de bord</span>
+      <span class="chevron" :class="{ open: journalOpen }">▾</span>
+    </button>
 
-    <section class="card shortcuts">
-      <header>Outils pratiques</header>
-      <ul>
-        <li v-for="item in quickActions" :key="item.label">
-          <a :href="item.href" target="_blank" rel="noopener">
-            <strong>{{ item.label }}</strong>
-            <span>{{ item.description }}</span>
-          </a>
-        </li>
-      </ul>
+    <transition name="fade">
+      <section v-if="journalOpen" class="card timeline">
+        <ol>
+          <li v-for="item in updates" :key="item.version">
+            <div class="line"></div>
+            <div class="meta">
+              <span class="badge">{{ item.version }}</span>
+              <span class="date">{{ item.date }}</span>
+            </div>
+            <p class="note">{{ item.note }}</p>
+            <ul class="tags">
+              <li v-for="tag in item.tags" :key="tag">{{ tag }}</li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+    </transition>
+
+    <section class="card links">
+      <h2>Navigation rapide</h2>
+      <router-link class="link" to="/emploi-du-temps">Consulter l'emploi du temps</router-link>
     </section>
 
     <section class="card contact">
-      <header>Contacter la coordination</header>
+      <h2>Contacter la coordination</h2>
       <form @submit.prevent="sendContact">
         <label>
-          <span>Email</span>
-          <input v-model="contact.email" type="email" placeholder="facultatif" />
+          <span>Email *</span>
+          <input v-model="contact.email" type="email" required placeholder="prenom.nom@universite.fr" />
         </label>
         <label>
           <span>Objet *</span>
@@ -120,6 +108,7 @@ function sendContact() {
         </label>
         <button type="submit" :disabled="!canSend">Préparer l'envoi</button>
       </form>
+      <p class="hint">L'email partira depuis votre messagerie. Une version avec envoi automatique est à l'étude.</p>
       <p v-if="status" class="status">{{ status }}</p>
     </section>
   </aside>
@@ -136,6 +125,34 @@ function sendContact() {
   color: var(--text-secondary);
 }
 
+.journal-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(99, 102, 241, 0.45);
+  background: rgba(79, 70, 229, 0.2);
+  color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.journal-toggle:hover {
+  background: rgba(99, 102, 241, 0.28);
+  transform: translateY(-2px);
+}
+
+.chevron {
+  transition: transform 0.2s ease;
+}
+
+.chevron.open {
+  transform: rotate(180deg);
+}
+
 .card {
   background: linear-gradient(160deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.85));
   border: 1px solid rgba(122, 162, 247, 0.08);
@@ -143,15 +160,6 @@ function sendContact() {
   padding: 0.95rem 1rem;
   box-shadow: 0 16px 36px rgba(2, 12, 34, 0.35);
   backdrop-filter: blur(14px);
-}
-
-.card header {
-  font-size: 0.92rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-primary);
-  margin-bottom: 0.7rem;
 }
 
 .timeline ol {
@@ -223,41 +231,37 @@ function sendContact() {
   color: #cfc4ff;
 }
 
-.shortcuts ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.links {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
 }
 
-.shortcuts a {
-  display: block;
-  background: rgba(91, 109, 174, 0.12);
-  border-radius: 12px;
-  padding: 0.55rem 0.65rem;
+.links h2,
+.contact h2 {
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.6rem;
   color: var(--text-primary);
+}
+
+.link {
+  display: block;
+  padding: 0.55rem 0.7rem;
+  border-radius: 12px;
+  background: rgba(59, 130, 246, 0.18);
+  color: var(--text-primary);
+  font-weight: 600;
   text-decoration: none;
   transition: transform 0.18s ease, background 0.18s ease;
 }
 
-.shortcuts strong {
-  display: block;
-  font-size: 0.86rem;
-}
-
-.shortcuts span {
-  display: block;
-  font-size: 0.74rem;
-  opacity: 0.78;
-}
-
-.shortcuts a:hover {
+.link:hover {
   transform: translateX(4px);
-  background: rgba(59, 130, 246, 0.24);
+  background: rgba(59, 130, 246, 0.28);
 }
-
 
 .contact form {
   display: flex;
@@ -320,9 +324,25 @@ button:not(:disabled):hover {
   box-shadow: 0 12px 25px rgba(79, 70, 229, 0.35);
 }
 
+.hint {
+  margin-top: 0.6rem;
+  font-size: 0.74rem;
+  opacity: 0.75;
+}
+
 .status {
-  margin-top: 0.5rem;
+  margin-top: 0.4rem;
   font-size: 0.75rem;
   color: #bbf7d0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.18s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
