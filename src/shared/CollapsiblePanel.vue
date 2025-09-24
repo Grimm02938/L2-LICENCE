@@ -7,6 +7,7 @@ const props = withDefaults(defineProps<{
 	iconName?: string
 	accent?: 'blue' | 'green' | 'purple' | 'red'
 	toggle?: boolean
+  accentRgb?: string // optional "r g b" override (e.g., "30 58 138")
 }>(), {
 	accent: 'blue',
 	toggle: true,
@@ -22,7 +23,7 @@ function onHeaderClick() {
 </script>
 
 <template>
-	<div class="panel" :class="`accent-${props.accent}`">
+	<div class="panel" :class="`accent-${props.accent}`" :style="props.accentRgb ? { '--accent-color': props.accentRgb } : undefined">
 		<button class="header" type="button" @click="onHeaderClick">
 			<span class="pill">
 				<Icon v-if="props.iconName" :name="props.iconName" class="ic" />
