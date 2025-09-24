@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
-// https://vite.dev/config/
+// Use relative base so it works on Firebase root and GitHub Pages subpath
 export default defineConfig({
   plugins: [vue()],
-  base: '/L2-LICENCE/', // Nom du dépôt GitHub
+  base: './',
 })
