@@ -2,8 +2,19 @@
 import PageLayout from '../shared/PageLayout.vue'
 import { subjects } from '../shared/data/subjects'
 import { useRouter } from 'vue-router'
+import Icon from '../shared/Icon.vue'
 const router = useRouter()
 function go(slug: string){ router.push(`/matiere/${slug}`) }
+function iconName(slug: string){
+  switch(slug){
+    case 'analyse': return 'function'
+    case 'algebre-lineaire': return 'matrix'
+    case 'arithmetique': return 'integers'
+    case 'topologie-1': return 'topology'
+    case 'calcul-numerique': return 'python'
+    default: return 'sigma'
+  }
+}
 </script>
 
 <template>
@@ -13,7 +24,9 @@ function go(slug: string){ router.push(`/matiere/${slug}`) }
 
     <div class="tiles">
       <button v-for="s in subjects" :key="s.slug" class="tile filled" :data-accent="s.accent" @click="go(s.slug)">
-        <span class="icon">{{ s.slug === 'calcul-numerique' ? '🐍' : (s.icon ?? '∑') }}</span>
+        <span class="icon">
+          <Icon :name="iconName(s.slug)" :size="20" />
+        </span>
         <span class="name">{{ s.name }}</span>
       </button>
     </div>
@@ -29,7 +42,7 @@ function go(slug: string){ router.push(`/matiere/${slug}`) }
 .tile.filled[data-accent="yellow"]{ background: rgba(250,204,21,.14); border-color: rgba(250,204,21,.45) }
 .tile.filled[data-accent="blue"]{ background: rgba(122,162,247,.14); border-color: rgba(122,162,247,.4) }
 .tile:hover{ transform: translateY(-2px); box-shadow: var(--shadow-md) }
-.icon{ font-size:1.2rem; opacity:.95 }
+.icon{ display:inline-flex; width:22px; height:22px; align-items:center; justify-content:center; opacity:.95 }
 .name{ font-weight:700; letter-spacing: .2px }
 [data-accent="purple"]{ box-shadow: inset 0 0 0 1px rgba(168,85,247,.3) }
 [data-accent="green"]{ box-shadow: inset 0 0 0 1px rgba(34,197,94,.3) }

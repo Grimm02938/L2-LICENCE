@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router'
 import PageLayout from '../shared/PageLayout.vue'
 import SubjectSectionCard from '../shared/SubjectSectionCard.vue'
 import CollapsiblePanel from '../shared/CollapsiblePanel.vue'
+import Icon from '../shared/Icon.vue'
 import { subjects } from '../shared/data/subjects'
 
 const route = useRoute()
@@ -12,7 +13,13 @@ const subject = computed(() => subjects.find(s => s.slug === String(route.params
 
 <template>
   <PageLayout>
-    <template #title>{{ subject?.name ?? 'Matière' }}</template>
+    <template #title>
+      <span class="title-with-icon" v-if="subject">
+        <Icon :name="subject.slug === 'analyse' ? 'function' : subject.slug === 'algebre-lineaire' ? 'matrix' : subject.slug === 'arithmetique' ? 'integers' : subject.slug === 'topologie-1' ? 'topology' : subject.slug === 'calcul-numerique' ? 'python' : 'sigma'" :size="20" />
+        <span>{{ subject.name }}</span>
+      </span>
+      <span v-else>Matière</span>
+    </template>
 
     <div v-if="subject" class="sections">
       <SubjectSectionCard
@@ -20,6 +27,7 @@ const subject = computed(() => subjects.find(s => s.slug === String(route.params
         :key="sec.id"
         :title="sec.title"
         :description="sec.description"
+        :icon-name="subject.slug === 'analyse' ? 'function' : subject.slug === 'algebre-lineaire' ? 'matrix' : subject.slug === 'arithmetique' ? 'integers' : subject.slug === 'topologie-1' ? 'topology' : subject.slug === 'calcul-numerique' ? 'python' : 'sigma'"
         :accent="subject.accent"
       >
         <CollapsiblePanel v-for="grp in sec.groups" :key="grp.id" :title="grp.title">

@@ -2,7 +2,7 @@ export type Subject = {
   slug: string
   name: string
   accent: 'purple'|'green'|'yellow'|'blue'
-  icon?: string
+  iconKey?: 'sigma'|'matrix'|'function'|'integers'|'topology'|'python'
   sections: {
     id: string
     title: string
@@ -20,7 +20,7 @@ export const subjects: Subject[] = [
     slug: 'topologie-1',
     name: 'Topologie 1',
     accent: 'purple',
-    icon: '⟂',
+    iconKey: 'topology',
     sections: [
       { id: 'intro', title: 'Bases de la topologie', description: 'Ouverts, fermés, adhérences.', groups: [
         { id: 'cours', title: 'Cours', links: [ { label: 'Chapitre : Ouvrir', href: '#' } ] },
@@ -32,7 +32,7 @@ export const subjects: Subject[] = [
     slug: 'calcul-numerique',
     name: 'Calcul Numérique',
     accent: 'green',
-    icon: '∎',
+    iconKey: 'python',
     sections: [
       { id: 'approx', title: 'Approximation et erreurs', description: 'Erreurs absolues et relatives.', groups: [
         { id: 'cours', title: 'Cours', links: [ { label: 'Chapitre : Ouvrir', href: '#' } ] },
@@ -44,7 +44,7 @@ export const subjects: Subject[] = [
     slug: 'analyse',
     name: 'Analyse',
     accent: 'blue',
-    icon: '∑',
+    iconKey: 'function',
     sections: [
       { id: 'series', title: 'Séries et convergence', groups: [
         { id: 'cours', title: 'Cours', links: [ { label: 'Chapitre : Ouvrir', href: '#' } ] },
@@ -56,7 +56,7 @@ export const subjects: Subject[] = [
     slug: 'algebre-lineaire',
     name: 'Algèbre linéaire',
     accent: 'yellow',
-    icon: '𝔸',
+    iconKey: 'matrix',
     sections: [
       { id: 'matrices', title: 'Matrices et applications linéaires', groups: [
         { id: 'cours', title: 'Cours', links: [ { label: 'Chapitre : Ouvrir', href: '#' } ] },
@@ -68,7 +68,7 @@ export const subjects: Subject[] = [
     slug: 'arithmetique',
     name: 'Arithmétique',
     accent: 'purple',
-    icon: 'ℤ',
+    iconKey: 'integers',
     sections: [
       { id: 'div', title: 'Divisibilité et congruences', groups: [
         { id: 'cours', title: 'Cours', links: [ { label: 'Chapitre : Ouvrir', href: '#' } ] },

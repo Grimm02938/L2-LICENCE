@@ -1,11 +1,14 @@
 <script setup lang="ts">
-defineProps<{ title: string; description?: string; icon?: string; accent?: 'purple'|'green'|'yellow'|'blue' }>()
+import Icon from './Icon.vue'
+defineProps<{ title: string; description?: string; iconName?: string; accent?: 'purple'|'green'|'yellow'|'blue' }>()
 </script>
 
 <template>
   <div class="card" :class="accent">
     <header class="card-header">
-      <span class="icon">{{ icon ?? '∫' }}</span>
+      <span class="icon">
+        <Icon :name="iconName || 'sigma'" :size="18" />
+      </span>
       <h2>{{ title }}</h2>
     </header>
     <p v-if="description" class="desc">{{ description }}</p>
