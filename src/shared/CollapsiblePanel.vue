@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import Icon from './Icon.vue'
 
 const props = withDefaults(defineProps<{
 	title: string
 	iconName?: string
 	accent?: 'blue' | 'green' | 'purple' | 'red'
+	accentRgb?: string // optional "r g b" override (e.g., "30 58 138")
+	accentHex?: string // optional "#RRGGBB" or "#RGB"
 	toggle?: boolean
-  accentRgb?: string // optional "r g b" override (e.g., "30 58 138")
 }>(), {
 	accent: 'blue',
 	toggle: true,
@@ -20,10 +21,32 @@ function onHeaderClick() {
 	emit('header-click')
 	if (props.toggle) open.value = !open.value
 }
+
+// Compute CSS variable from either accentRgb or accentHex
+const accentVar = computed(() => {
+	if (props.accentRgb) return props.accentRgb
+	if (props.accentHex) {
+		const h = props.accentHex.replace('#','')
+		let r = 0, g = 0, b = 0
+		if (h.length === 3) {
+			r = parseInt(h[0] + h[0], 16)
+			g = parseInt(h[1] + h[1], 16)
+			b = parseInt(h[2] + h[2], 16)
+			return `${r} ${g} ${b}`
+		}
+		if (h.length >= 6) {
+			r = parseInt(h.slice(0,2), 16)
+			g = parseInt(h.slice(2,4), 16)
+			b = parseInt(h.slice(4,6), 16)
+			return `${r} ${g} ${b}`
+		}
+	}
+	return ''
+})
 </script>
 
 <template>
-	<div class="panel" :class="`accent-${props.accent}`" :style="props.accentRgb ? { '--accent-color': props.accentRgb } : undefined">
+	<div class="panel" :class="`accent-${props.accent}`" :style="accentVar ? { '--accent-color': accentVar } : undefined">
 		<button class="header" type="button" @click="onHeaderClick">
 			<span class="pill">
 				<Icon v-if="props.iconName" :name="props.iconName" class="ic" />

@@ -5,6 +5,7 @@ export type Subject = {
   iconKey: string
   accent: 'blue' | 'green' | 'purple' | 'red'
   accentRgb?: string // optional custom RGB triplet like "59 130 246"
+  accentHex?: string // optional exact HEX like "#6d28d9"
 }
 
 export const subjects: Subject[] = [
@@ -15,6 +16,7 @@ export const subjects: Subject[] = [
     iconKey: 'algebra',
     accent: 'blue',
     accentRgb: '59 130 246',
+    // accentHex: '#5078ff', // uncomment and set to your exact photo color
   },
   {
     slug: 'analyse',
@@ -23,6 +25,7 @@ export const subjects: Subject[] = [
     iconKey: 'function',
     accent: 'purple',
     accentRgb: '99 102 241',
+    // accentHex: '#7c7ef5',
   },
   {
     slug: 'arithmetique',
@@ -31,6 +34,7 @@ export const subjects: Subject[] = [
     iconKey: 'integers',
     accent: 'red',
     accentRgb: '217 70 239',
+    // accentHex: '#ff6b6b',
   },
   {
     slug: 'topologie-1',
@@ -39,6 +43,7 @@ export const subjects: Subject[] = [
     iconKey: 'topology',
     accent: 'green',
     accentRgb: '16 185 129',
+    // accentHex: '#22c55e',
   },
   {
     slug: 'calcul-numerique',
@@ -47,5 +52,6 @@ export const subjects: Subject[] = [
     iconKey: 'code',
     accent: 'blue',
     accentRgb: '14 165 233',
+    // accentHex: '#60a5fa',
   },
 ]

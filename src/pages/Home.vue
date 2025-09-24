@@ -21,6 +21,7 @@ function goToSubject(slug: string) {
 				:icon-name="s.iconKey"
 				:accent="s.accent"
 				:accent-rgb="s.accentRgb"
+				:accent-hex="s.accentHex"
 				:toggle="false"
 				@header-click="goToSubject(s.slug)"
 			>
