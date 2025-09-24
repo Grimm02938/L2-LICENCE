@@ -9,6 +9,16 @@ import { subjects } from '../shared/data/subjects'
 
 const route = useRoute()
 const subject = computed(() => subjects.find(s => s.slug === String(route.params.slug)))
+
+function panelIcon(groupId: string){
+  const id = groupId.toLowerCase()
+  if(id.includes('cours')) return 'book'
+  if(id.includes('td')) return 'function'
+  if(id.includes('info') || id.includes('algo') || id.includes('code')) return 'code'
+  if(id.includes('phys')) return 'atom'
+  if(id.includes('franc') || id.includes('angl')) return 'language'
+  return 'sigma'
+}
 </script>
 
 <template>
@@ -30,7 +40,7 @@ const subject = computed(() => subjects.find(s => s.slug === String(route.params
         :icon-name="subject.slug === 'analyse' ? 'function' : subject.slug === 'algebre-lineaire' ? 'matrix' : subject.slug === 'arithmetique' ? 'integers' : subject.slug === 'topologie-1' ? 'topology' : subject.slug === 'calcul-numerique' ? 'python' : 'sigma'"
         :accent="subject.accent"
       >
-        <CollapsiblePanel v-for="grp in sec.groups" :key="grp.id" :title="grp.title">
+        <CollapsiblePanel v-for="grp in sec.groups" :key="grp.id" :title="grp.title" :accent="subject.accent" :icon-name="panelIcon(grp.id)">
           <ul class="links">
             <li v-for="l in grp.links" :key="l.label">
               <a class="chip" :href="l.href" target="_blank" rel="noopener">{{ l.label }}</a>

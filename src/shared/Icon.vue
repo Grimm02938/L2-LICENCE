@@ -10,6 +10,11 @@ const icons: Record<string, string> = {
   integers: '<path d="M6 5v14h3l9-14v14" stroke-width="2" fill="none"/>',
   topology: '<path d="M12 4c4.418 0 8 3.134 8 7s-3.582 7-8 7-8-3.134-8-7 3.582-7 8-7Zm0 0c3 3 3 11 0 14" stroke-width="2" fill="none"/>',
   python: '<path d="M9 3h4a3 3 0 0 1 3 3v3H10a2 2 0 0 1-2-2V3Z"/><path d="M15 21h-4a3 3 0 0 1-3-3v-3h6a2 2 0 0 1 2 2v4Z"/><circle cx="13" cy="6" r="1" fill="currentColor"/>',
+  flask: '<path d="M10 3h4v2l4 6v6a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V11l4-6V3Z" fill="none" stroke-width="2"/><path d="M8 14h8" stroke-width="2"/>',
+  code: '<path d="M8 8 4 12l4 4" fill="none" stroke-width="2"/><path d="M16 8l4 4-4 4" fill="none" stroke-width="2"/>',
+  book: '<path d="M5 5h9a3 3 0 0 1 3 3v11H8a3 3 0 0 0-3 3V5Z" fill="none" stroke-width="2"/><path d="M17 19V8a3 3 0 0 1 3-3v14a3 3 0 0 0-3-0Z" fill="none" stroke-width="2"/>',
+  language: '<circle cx="12" cy="12" r="9" fill="none" stroke-width="2"/><path d="M3 12h18M12 3c3 3 3 15 0 18M6 6c4 2 8 2 12 0M6 18c4-2 8-2 12 0" fill="none" stroke-width="2"/>',
+  atom: '<circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="12" rx="9" ry="4" fill="none" stroke-width="2"/><ellipse cx="12" cy="12" rx="4" ry="9" fill="none" stroke-width="2"/>'
 }
 
 const svg = icons[props.name] ?? icons['function']
