@@ -24,8 +24,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build
-        run: npm run build
+      - name: Build (GitHub Pages base)
+        run: |
+          echo "GITHUB_PAGES=true" >> $GITHUB_ENV
+          npm run build
 
       - name: Ensure .nojekyll
         run: touch dist/.nojekyll
