@@ -12,7 +12,7 @@ export const subjects: Subject[] = [
   {
     slug: 'algebre-lineaire',
     title: 'Algèbre linéaire',
-    description: "Espaces vectoriels, applications linéaires, matrices et déterminants.",
+    description: "Cette section regroupe les cours d'Algèbre (Menous).",
     iconKey: 'algebra',
     accent: 'blue',
     accentRgb: '59 130 246',
@@ -21,7 +21,7 @@ export const subjects: Subject[] = [
   {
     slug: 'analyse',
     title: 'Analyse',
-    description: 'Suites, séries, continuité, dérivabilité, intégration.',
+    description: "Cette section regroupe les cours d'Analyse (Pallard).",
     iconKey: 'function',
     accent: 'purple',
     accentRgb: '99 102 241',
@@ -30,7 +30,7 @@ export const subjects: Subject[] = [
   {
     slug: 'arithmetique',
     title: 'Arithmétique',
-    description: 'Entiers, divisibilité, congruences, théorèmes classiques.',
+    description: "Cette section regroupe les cours d'Arithmétique (Fahlaoui).",
     iconKey: 'integers',
     accent: 'red',
     accentRgb: '217 70 239',
@@ -39,7 +39,7 @@ export const subjects: Subject[] = [
   {
     slug: 'topologie-1',
     title: 'Topologie',
-    description: 'Voisinages, ouverts, fermés, continuité topologique.',
+    description: 'Cette section regroupe les cours de Topologie (Haglund).',
     iconKey: 'topology',
     accent: 'green',
     accentRgb: '16 185 129',
@@ -48,7 +48,7 @@ export const subjects: Subject[] = [
   {
     slug: 'calcul-numerique',
     title: 'Calcul Numérique',
-    description: 'Méthodes numériques pour équations et intégration.',
+    description: 'Cette section regroupe les cours de Calcul numérique (Graille).',
     iconKey: 'code',
     accent: 'blue',
     accentRgb: '14 165 233',

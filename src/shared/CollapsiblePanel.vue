@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import Icon from './Icon.vue'
 
 const props = withDefaults(defineProps<{
@@ -15,7 +15,11 @@ const props = withDefaults(defineProps<{
 })
 
 const emit = defineEmits<{ 'header-click': [] }>()
-const open = ref(true)
+const open = ref(props.toggle ? false : true)
+
+watch(() => props.toggle, value => {
+	if (!value) open.value = true
+})
 
 function onHeaderClick() {
 	emit('header-click')
@@ -47,11 +51,11 @@ const accentVar = computed(() => {
 
 <template>
 	<div class="panel" :class="`accent-${props.accent}`" :style="accentVar ? { '--accent-color': accentVar } : undefined">
-		<button class="header" type="button" @click="onHeaderClick">
+		<button class="header" type="button" @click="onHeaderClick" :aria-expanded="open">
 			<span class="pill">
 				<Icon v-if="props.iconName" :name="props.iconName" class="ic" />
 				<span class="ttl">{{ props.title }}</span>
-				<span v-if="props.toggle" class="caret">▾</span>
+				<span v-if="props.toggle" class="caret" :class="{ 'caret-open': open }">▾</span>
 			</span>
 		</button>
 		<div v-show="open || !props.toggle" class="body">
@@ -80,7 +84,8 @@ const accentVar = computed(() => {
 .header { width:100%; padding:.75rem; display:flex; align-items:center; background:transparent; border:none; color:var(--text-primary); cursor:pointer }
 .pill { display:inline-flex; align-items:center; gap:.5rem; padding:.35rem .6rem; border-radius: 999px; border:1px solid rgba(var(--accent-color), .45); background: rgba(var(--accent-color), .16); color: rgb(var(--accent-color)) }
 .ttl { font-weight:800; text-transform: uppercase; letter-spacing: .02em }
-.caret { opacity:.7; margin-left:.35rem }
+.caret { opacity:.7; margin-left:.35rem; transition: transform .18s ease }
+.caret-open { transform: rotate(180deg) }
 .ic { width: 18px; height: 18px }
 .body { padding: 0 1rem 1rem 1rem; color: var(--text-secondary) }
 

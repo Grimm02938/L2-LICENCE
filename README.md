@@ -1,5 +1,38 @@
 # L2-LICENCE
-Site destiné aux élèves de L2 MATHS Paris Saclay
+
+Portail de ressources pour les étudiants de L2 Mathématiques de l’université Paris-Saclay.
+
+## Aperçu
+
+- Interface sombre moderne avec cartes colorées par matière
+- Accès rapide aux chapitres : cours, TD, corrections, DS
+- Barre latérale (desktop) avec recherche, explorateur et raccourcis utiles
+- Avertissement légal sur la page d’accueil : documents propriété des enseignants, usage commercial interdit
+
+## Ajouter des documents
+
+Consultez `docs/ADDING_CONTENT.md` pour connaître la procédure détaillée :
+
+1. Déposer vos PDF dans `public/docs/<matiere>/`
+2. Mettre à jour les liens dans `src/shared/data/content.ts`
+3. (Optionnel) Utiliser `scripts/split_pdf.py` pour découper automatiquement un PDF volumineux en chapitres
+
+## Développement
+
+```bash
+npm install
+npm run dev
+```
+
+Build de production :
+
+```bash
+npm run build
+```
+
+## Licence
+
+Projet interne – diffusion limitée aux étudiants de la licence. Toute réutilisation commerciale des documents pédagogiques est interdite.
 
 ## Configuration du déploiement
 
