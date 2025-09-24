@@ -2,22 +2,15 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import TreeNode from './TreeNode.vue'
+import { subjects } from './data/subjects'
 
 const q = ref('')
 const router = useRouter()
 
 const items = [
-  { label: 'Agenda', path: '/' },
-  { label: 'MP', path: '/' },
-  { label: 'MPSI', children: [
-    { label: '[MPSI] Anglais', path: '/' },
-    { label: '[MPSI] Français', path: '/' },
-    { label: '[MPSI] Informatique', path: '/' },
-    { label: '[MPSI] Mathématiques', children: [
-      { label: 'Cours & TD', path: '/MPSI/Mathematiques/Cours_TD' },
-    ] },
-    { label: '[MPSI] Physique Chimie', path: '/' },
-  ] }
+  { label: 'Accueil', path: '/' },
+  { label: 'Matières', children: subjects.map(s => ({ label: s.name, path: `/matiere/${s.slug}` })) },
+  { label: 'MPSI (exemple)', children: [ { label: 'Mathématiques — Cours & TD', path: '/MPSI/Mathematiques/Cours_TD' } ] }
 ]
 
 const filtered = computed(() => {
