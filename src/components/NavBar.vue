@@ -28,7 +28,8 @@ watch(isMenuOpen, (open) => {
           </a>
         </div>
         
-        <button class="mobile-menu-button" @click="toggleMenu" aria-label="Menu">
+        <!-- Mobile menu button hidden per request -->
+        <button class="mobile-menu-button" style="display:none" aria-hidden="true" tabindex="-1">
           <span class="bar"></span>
           <span class="bar"></span>
           <span class="bar"></span>
@@ -127,7 +128,7 @@ watch(isMenuOpen, (open) => {
 
 @media (max-width: 768px) {
   .mobile-menu-button {
-    display: flex;
+    display: none; /* hidden on mobile */
   }
   
   .navbar-menu {
