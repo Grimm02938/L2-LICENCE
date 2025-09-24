@@ -16,7 +16,7 @@ export const subjects: Subject[] = [
     iconKey: 'algebra',
     accent: 'blue',
     accentRgb: '59 130 246',
-    // accentHex: '#5078ff', // uncomment and set to your exact photo color
+    accentHex: '#b69af1',
   },
   {
     slug: 'analyse',

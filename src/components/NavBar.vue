@@ -53,8 +53,8 @@ watch(isMenuOpen, (open) => {
   position: sticky;
   top: 0;
   z-index: 100;
-  backdrop-filter: blur(10px);
-  background: rgba(10, 14, 23, 0.8);
+  backdrop-filter: blur(8px);
+  background: rgba(15, 22, 38, 0.85);
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -73,6 +73,10 @@ watch(isMenuOpen, (open) => {
 .brand { display:flex; align-items:center; gap:.75rem; color: var(--text-primary); text-decoration:none; }
 .brand-text { display:flex; flex-direction:column; line-height:1.1 }
 .brand-title { font-weight: 900; letter-spacing:.4px }
+  
+  /* Hide mobile overlay menu entirely per request to avoid dark patch at left */
+  .mobile-menu-button { display: none; }
+  .navbar-menu { display: none; }
 .brand-sub { color: var(--text-secondary); font-size:.8rem }
 
 .navbar-menu {
