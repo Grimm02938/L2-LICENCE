@@ -23,10 +23,10 @@ function go(slug: string){ router.push(`/matiere/${slug}`) }
 <style scoped>
 .lead{ color: var(--text-secondary); margin-bottom: 1rem }
 .tiles{ display:grid; grid-template-columns: repeat(auto-fill,minmax(180px,1fr)); gap:1rem }
-.tile{ text-align:left; background: var(--card-bg); border:1px solid var(--border-color); border-radius:.75rem; padding:1rem; display:flex; align-items:center; gap:.75rem }
+.tile{ text-align:left; background: var(--card-bg); border:1px solid var(--border-color); border-radius:.75rem; padding:1rem; display:flex; align-items:center; gap:.75rem; color: var(--text-primary); }
 .tile:hover{ transform: translateY(-2px); box-shadow: var(--shadow-md) }
 .icon{ font-size:1.2rem; opacity:.9 }
-.name{ font-weight:700 }
+.name{ font-weight:700; letter-spacing: .2px }
 [data-accent="purple"]{ box-shadow: inset 0 0 0 1px rgba(168,85,247,.3) }
 [data-accent="green"]{ box-shadow: inset 0 0 0 1px rgba(34,197,94,.3) }
 [data-accent="yellow"]{ box-shadow: inset 0 0 0 1px rgba(234,179,8,.3) }

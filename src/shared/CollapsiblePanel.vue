@@ -23,5 +23,5 @@ const open = ref(true)
 .panel-header{ display:flex; align-items:center; gap:.5rem; padding:.75rem 1rem; cursor:pointer; font-weight:600 }
 .icon{ opacity:.85; font-size:.95rem }
 .chev{ margin-left:auto; opacity:.7 }
-.panel-body{ padding: .5rem 1rem 1rem }
+.panel-body{ padding: .5rem 1rem 1rem; color: var(--text-primary); }
 </style>
