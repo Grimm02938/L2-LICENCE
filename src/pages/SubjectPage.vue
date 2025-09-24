@@ -4,7 +4,6 @@ import { useRoute } from 'vue-router'
 import { subjects } from '../shared/data/subjects'
 import { contentBySubject } from '../shared/data/content'
 import Icon from '../shared/Icon.vue'
-import SectionCard from '../shared/SectionCard.vue'
 import CollapsiblePanel from '../shared/CollapsiblePanel.vue'
 
 const route = useRoute()
@@ -65,10 +64,11 @@ const chapters = computed(() => contentBySubject[slug.value] || [])
 <style scoped>
 .title { display:flex; align-items:center; gap:.75rem }
 .ic { width: 28px; height: 28px }
-.desc { color: var(--text-secondary) }
+.desc { color: var(--text-secondary); margin-bottom: .5rem }
 .chapters { display: grid; gap: 12px; margin-top: 14px }
 .rows { display: grid; gap: .4rem; }
-.row { display:flex; align-items:center; gap:.5rem }
+.row { display:flex; align-items:center; gap:.5rem; flex-wrap: wrap }
 .label { color: var(--text-primary); font-weight: 700 }
-.chip { display:inline-block; padding: .15rem .45rem; border-radius: 6px; border:1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.06); color: rgb(var(--accent-color)); }
+.chip { display:inline-flex; align-items:center; padding: .15rem .45rem; border-radius: 999px; border:1px solid rgba(var(--accent-color), .45); background: rgba(var(--accent-color), .14); color: rgb(var(--accent-color)); font-weight:700; font-size:.9rem }
+.chip:hover { background: rgba(var(--accent-color), .2) }
 </style>
