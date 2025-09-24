@@ -59,7 +59,9 @@ Les textes descriptifs visibles sur la page d'accueil se trouvent dans `src/shar
 
 ## 5. Splitter un PDF volumineux en plusieurs fichiers
 
-Nous ne traitons pas automatiquement les PDF dans le dépôt, mais vous pouvez utiliser le script `scripts/split_pdf.py` pour découper un document en chapitres depuis votre machine :
+> ℹ️ Le dépôt ne contient pas vos PDF d'origine et l'assistant ne peut pas les découper automatiquement. Réalisez l'opération sur votre poste en suivant la procédure ci-dessous, puis ajoutez les fichiers générés dans `public/docs/...`.
+
+Vous pouvez utiliser le script `scripts/split_pdf.py` pour découper un document en chapitres depuis votre machine :
 
 ```bash
 pip install pypdf

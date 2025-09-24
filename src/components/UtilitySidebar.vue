@@ -1,173 +1,328 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { subjects } from '../shared/data/subjects'
+import { reactive, ref, computed } from 'vue'
 
-const query = ref('')
-const router = useRouter()
+const updates = [
+  {
+    version: 'v1.3',
+    date: '24 sept. 2025',
+    tags: ['Sidebar repensée', 'Chapitres repliés'],
+    note: 'Optimisation de la navigation desktop et polish mobile.',
+  },
+  {
+    version: 'v1.2',
+    date: '23 sept. 2025',
+    tags: ['Couleurs exactes', 'Icônes Lucide'],
+    note: 'Palette par matière et refonte visuelle des cartes.',
+  },
+  {
+    version: 'v1.1',
+    date: '22 sept. 2025',
+    tags: ['Déploiement'],
+    note: 'Mise en ligne GitHub Pages + Firebase.',
+  },
+]
 
-const filtered = computed(() => {
-  const value = query.value.trim().toLowerCase()
-  if (!value) return subjects.slice(0, 5)
-  return subjects.filter(s => s.title.toLowerCase().includes(value) || s.slug.includes(value))
-})
+const quickActions = [
+  {
+    label: 'Guide ajout de contenus',
+    description: 'Tutoriel pour lier cours, TD, DS',
+    href: 'https://github.com/Grimm02938/L2-LICENCE/blob/main/docs/ADDING_CONTENT.md',
+  },
+  {
+    label: 'Script découpe PDF',
+    description: 'Automatiser la séparation en chapitres',
+    href: 'https://github.com/Grimm02938/L2-LICENCE/blob/main/scripts/split_pdf.py',
+  },
+  {
+    label: 'Boîte à idées',
+    description: 'Proposer une évolution',
+    href: 'https://github.com/Grimm02938/L2-LICENCE/issues/new',
+  },
+]
 
-function openSubject(slug: string) {
-  router.push({ name: 'subject', params: { slug } })
+const contact = reactive({ email: '', subject: '', message: '' })
+const status = ref('')
+
+const canSend = computed(() => contact.subject.trim().length > 0 && contact.message.trim().length > 4)
+const encoded = 'YWRhbWUuYWJkZWxtb3VsYUB1bml2ZXJzaXRlLXBhcmlzLXNhY2xheS5mcg=='
+
+function decodeRecipient() {
+  if (typeof atob === 'function') return atob(encoded)
+  return ''
 }
 
-const shortcuts = [
-  { label: 'Calendrier examen', href: 'https://www.universite-paris-saclay.fr/' },
-  { label: 'Forum étudiants', href: 'https://forum.math.u-psud.fr/' },
-  { label: 'Dépôt devoirs (ENT)', href: 'https://uvsq.course.sakai/' },
-]
+function resetForm() {
+  contact.email = ''
+  contact.subject = ''
+  contact.message = ''
+}
 
-const resources = [
-  { label: 'Bibliothèque Numérique', href: 'https://www.bib.math.u-psud.fr/' },
-  { label: 'Annales DS', href: '#' },
-  { label: 'Contacts enseignants', href: '#' },
-]
+function sendContact() {
+  if (!canSend.value || typeof window === 'undefined') return
+  const target = decodeRecipient()
+  if (!target) return
+  const params = new URLSearchParams({
+    subject: contact.subject.trim(),
+    body: `Expéditeur : ${contact.email || 'non précisé'}\n\n${contact.message}`,
+  })
+  window.location.href = `mailto:${target}?${params.toString()}`
+  status.value = 'Message prêt dans votre messagerie.'
+  resetForm()
+  window.setTimeout(() => (status.value = ''), 3200)
+}
 </script>
 
 <template>
-  <aside class="sidebar" aria-label="Outils rapides">
-    <div class="block">
-      <h3>Recherche</h3>
-      <input
-        v-model="query"
-        type="search"
-        placeholder="Rechercher une matière"
-        class="search"
-      />
-      <ul class="results" v-if="filtered.length">
-        <li v-for="s in filtered" :key="s.slug">
-          <button type="button" @click="openSubject(s.slug)">
-            {{ s.title }}
-          </button>
+  <aside class="sidebar" aria-label="Outils de la plateforme">
+    <section class="card timeline">
+      <header>Journal de bord</header>
+      <ol>
+        <li v-for="item in updates" :key="item.version">
+          <div class="line"></div>
+          <div class="meta">
+            <span class="badge">{{ item.version }}</span>
+            <span class="date">{{ item.date }}</span>
+          </div>
+          <p class="note">{{ item.note }}</p>
+          <ul class="tags">
+            <li v-for="tag in item.tags" :key="tag">{{ tag }}</li>
+          </ul>
         </li>
-      </ul>
-      <p v-else class="empty">Aucun résultat.</p>
-    </div>
+      </ol>
+    </section>
 
-    <div class="block">
-      <h3>Explorateur</h3>
-      <ul class="links">
-        <li v-for="s in subjects" :key="s.slug">
-          <button type="button" @click="openSubject(s.slug)">
-            {{ s.title }}
-          </button>
+    <section class="card shortcuts">
+      <header>Outils pratiques</header>
+      <ul>
+        <li v-for="item in quickActions" :key="item.label">
+          <a :href="item.href" target="_blank" rel="noopener">
+            <strong>{{ item.label }}</strong>
+            <span>{{ item.description }}</span>
+          </a>
         </li>
       </ul>
-    </div>
+    </section>
 
-    <div class="block">
-      <h3>Raccourcis</h3>
-      <ul class="links">
-        <li v-for="item in shortcuts" :key="item.label">
-          <a :href="item.href" target="_blank" rel="noopener">{{ item.label }}</a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="block">
-      <h3>Ressources utiles</h3>
-      <ul class="links">
-        <li v-for="item in resources" :key="item.label">
-          <a :href="item.href" target="_blank" rel="noopener">{{ item.label }}</a>
-        </li>
-      </ul>
-    </div>
+    <section class="card contact">
+      <header>Contacter la coordination</header>
+      <form @submit.prevent="sendContact">
+        <label>
+          <span>Email</span>
+          <input v-model="contact.email" type="email" placeholder="facultatif" />
+        </label>
+        <label>
+          <span>Objet *</span>
+          <input v-model="contact.subject" type="text" required />
+        </label>
+        <label class="textarea">
+          <span>Message *</span>
+          <textarea v-model="contact.message" rows="3" required></textarea>
+        </label>
+        <button type="submit" :disabled="!canSend">Préparer l'envoi</button>
+      </form>
+      <p v-if="status" class="status">{{ status }}</p>
+    </section>
   </aside>
 </template>
 
 <style scoped>
 .sidebar {
   position: sticky;
-  top: 100px;
+  top: 90px;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  padding: 1.25rem;
-  width: 280px;
-  background: rgba(15, 23, 42, 0.8);
-  border: 1px solid rgba(255,255,255,0.05);
-  border-radius: 18px;
-  box-shadow: 0 20px 45px rgba(0,0,0,0.35);
-  backdrop-filter: blur(12px);
-}
-
-.block h3 {
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  margin-bottom: 0.65rem;
-  text-transform: uppercase;
+  gap: 1rem;
+  width: 240px;
   color: var(--text-secondary);
 }
 
-.search {
-  width: 100%;
-  background: rgba(17,24,39,0.9);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 999px;
-  padding: 0.55rem 0.9rem;
+.card {
+  background: linear-gradient(160deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.85));
+  border: 1px solid rgba(122, 162, 247, 0.08);
+  border-radius: 16px;
+  padding: 0.95rem 1rem;
+  box-shadow: 0 16px 36px rgba(2, 12, 34, 0.35);
+  backdrop-filter: blur(14px);
+}
+
+.card header {
+  font-size: 0.92rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: var(--text-primary);
-  font-size: 0.95rem;
+  margin-bottom: 0.7rem;
 }
 
-.search:focus {
-  outline: none;
-  border-color: rgba(99,102,241,0.5);
-  box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
-}
-
-.results,
-.links {
+.timeline ol {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.75rem;
 }
 
-.results button,
-.links button {
-  width: 100%;
-  text-align: left;
-  border: none;
-  background: rgba(255,255,255,0.05);
-  border-radius: 12px;
-  padding: 0.55rem 0.75rem;
-  color: var(--text-primary);
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.15s ease, background 0.2s ease;
+.timeline li {
+  position: relative;
+  padding-left: 1.6rem;
 }
 
-.results button:hover,
-.links button:hover {
-  background: rgba(59,130,246,0.18);
-  transform: translateX(4px);
+.timeline .line {
+  position: absolute;
+  left: 0.55rem;
+  top: 0.35rem;
+  width: 2px;
+  height: calc(100% + 0.4rem);
+  background: linear-gradient(180deg, rgba(59, 130, 246, 0.5), rgba(147, 51, 234, 0));
 }
 
-.links a {
-  display: block;
-  padding: 0.5rem 0.75rem;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.04);
+.timeline li:last-child .line {
+  display: none;
+}
+
+.meta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.badge {
+  background: rgba(59, 130, 246, 0.25);
+  color: #9cc4ff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+}
+
+.date {
+  font-size: 0.72rem;
+  opacity: 0.75;
+}
+
+.note {
+  margin: 0.35rem 0 0.25rem;
   color: var(--text-secondary);
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-.links a:hover {
-  background: rgba(59,130,246,0.20);
-  color: var(--text-primary);
-}
-
-.empty {
   font-size: 0.85rem;
+}
+
+.tags {
+  list-style: none;
+  display: flex;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+}
+
+.tags li {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  background: rgba(147, 51, 234, 0.18);
+  color: #cfc4ff;
+}
+
+.shortcuts ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.shortcuts a {
+  display: block;
+  background: rgba(91, 109, 174, 0.12);
+  border-radius: 12px;
+  padding: 0.55rem 0.65rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.shortcuts strong {
+  display: block;
+  font-size: 0.86rem;
+}
+
+.shortcuts span {
+  display: block;
+  font-size: 0.74rem;
+  opacity: 0.78;
+}
+
+.shortcuts a:hover {
+  transform: translateX(4px);
+  background: rgba(59, 130, 246, 0.24);
+}
+
+
+.contact form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.78rem;
   color: var(--text-secondary);
+}
+
+input,
+textarea {
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 10px;
+  padding: 0.45rem 0.6rem;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  transition: border 0.18s ease, box-shadow 0.18s ease;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: rgba(99, 102, 241, 0.6);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+button {
+  border: none;
+  border-radius: 999px;
+  padding: 0.55rem 0.8rem;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: #0b1220;
+  background: linear-gradient(135deg, #60a5fa, #7c3aed);
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+button:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(79, 70, 229, 0.35);
+}
+
+.status {
   margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: #bbf7d0;
 }
 </style>

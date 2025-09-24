@@ -66,9 +66,15 @@ const chapters = computed(() => contentBySubject[slug.value] || [])
 .ic { width: 28px; height: 28px }
 .desc { color: var(--text-secondary); margin-bottom: .5rem }
 .chapters { display: grid; gap: 12px; margin-top: 14px }
-.rows { display: grid; gap: .4rem; }
-.row { display:flex; align-items:center; gap:.5rem; flex-wrap: wrap }
-.label { color: var(--text-primary); font-weight: 700 }
-.chip { display:inline-flex; align-items:center; padding: .15rem .45rem; border-radius: 999px; border:1px solid rgba(var(--accent-color), .45); background: rgba(var(--accent-color), .14); color: rgb(var(--accent-color)); font-weight:700; font-size:.9rem }
+.rows { display: grid; gap: .5rem; }
+.row { display:grid; grid-template-columns: 140px minmax(0, 1fr); align-items:center; gap:.55rem; }
+.label { color: var(--text-primary); font-weight: 700; line-height:1.35 }
+.chip { display:inline-flex; align-items:center; justify-content:flex-start; padding: .18rem .55rem; border-radius: 999px; border:1px solid rgba(var(--accent-color), .45); background: rgba(var(--accent-color), .14); color: rgb(var(--accent-color)); font-weight:700; font-size:.85rem; letter-spacing:.01em }
 .chip:hover { background: rgba(var(--accent-color), .2) }
+.chip:focus-visible { outline: 2px solid rgba(var(--accent-color), .6); outline-offset: 2px }
+
+@media (max-width: 600px) {
+	.row { grid-template-columns: 1fr; justify-items:flex-start; row-gap:.2rem; }
+	.label { margin-bottom: .05rem; }
+}
 </style>

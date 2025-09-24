@@ -3,7 +3,7 @@ export type Subject = {
   title: string
   description: string
   iconKey: string
-  accent: 'blue' | 'green' | 'purple' | 'red'
+  accent: 'blue' | 'green' | 'purple' | 'red' | 'orange'
   accentRgb?: string // optional custom RGB triplet like "59 130 246"
   accentHex?: string // optional exact HEX like "#6d28d9"
 }
@@ -32,9 +32,9 @@ export const subjects: Subject[] = [
     title: 'Arithmétique',
     description: "Cette section regroupe les cours d'Arithmétique (Fahlaoui).",
     iconKey: 'integers',
-    accent: 'red',
-    accentRgb: '217 70 239',
-    // accentHex: '#ff6b6b',
+    accent: 'orange',
+    accentRgb: '249 115 22',
+    accentHex: '#f97316',
   },
   {
     slug: 'topologie-1',

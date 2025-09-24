@@ -5,7 +5,7 @@ import Icon from './Icon.vue'
 const props = withDefaults(defineProps<{
 	title: string
 	iconName?: string
-	accent?: 'blue' | 'green' | 'purple' | 'red'
+	accent?: 'blue' | 'green' | 'purple' | 'red' | 'orange'
 	accentRgb?: string // optional "r g b" override (e.g., "30 58 138")
 	accentHex?: string // optional "#RRGGBB" or "#RGB"
 	toggle?: boolean
@@ -94,4 +94,5 @@ const accentVar = computed(() => {
 .accent-green { --accent-color: 34 197 94; }
 .accent-purple { --accent-color: 168 85 247; }
 .accent-red { --accent-color: 239 68 68; }
+.accent-orange { --accent-color: 249 115 22; }
 </style>
