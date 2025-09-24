@@ -27,8 +27,8 @@ function onHeaderClick() {
 			<span class="pill">
 				<Icon v-if="props.iconName" :name="props.iconName" class="ic" />
 				<span class="ttl">{{ props.title }}</span>
+				<span v-if="props.toggle" class="caret">▾</span>
 			</span>
-			<span v-if="props.toggle" class="caret">▾</span>
 		</button>
 		<div v-show="open || !props.toggle" class="body">
 			<slot />
@@ -38,16 +38,26 @@ function onHeaderClick() {
 </template>
 
 <style scoped>
-.panel { border: 1px solid var(--border-color); border-radius: 12px; background: rgba(17,24,39,.6); }
-.header { width:100%; padding:.75rem; display:flex; justify-content:space-between; align-items:center; background:transparent; border:none; color:var(--text-primary); cursor:pointer }
-.pill { display:inline-flex; align-items:center; gap:.5rem; padding:.35rem .6rem; border-radius: 999px; border:1px solid var(--border-color); background: rgba(59,130,246,.08) }
+/* Base panel styling */
+.panel {
+  --accent-color: 59 130 246; /* default to blue RGB components */
+  border: 1px solid rgba(var(--accent-color), .35);
+  border-radius: 12px;
+  background:
+    linear-gradient(0deg, rgba(var(--accent-color), .08), rgba(var(--accent-color), .08)),
+    rgba(17,24,39,.65);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.15);
+}
+.header { width:100%; padding:.75rem; display:flex; align-items:center; background:transparent; border:none; color:var(--text-primary); cursor:pointer }
+.pill { display:inline-flex; align-items:center; gap:.5rem; padding:.35rem .6rem; border-radius: 999px; border:1px solid rgba(var(--accent-color), .35); background: rgba(var(--accent-color), .12) }
 .ttl { font-weight: 700 }
-.caret { opacity:.6 }
+.caret { opacity:.7; margin-left:.35rem }
 .ic { width: 18px; height: 18px }
 .body { padding: 0 1rem 1rem 1rem; color: var(--text-secondary) }
 
-.accent-blue .pill { background: rgba(59,130,246,.10); border-color: rgba(59,130,246,.35) }
-.accent-green .pill { background: rgba(34,197,94,.10); border-color: rgba(34,197,94,.35) }
-.accent-purple .pill { background: rgba(168,85,247,.10); border-color: rgba(168,85,247,.35) }
-.accent-red .pill { background: rgba(239,68,68,.10); border-color: rgba(239,68,68,.35) }
+/* Accent variants map the RGB triplet used by rgba(var(--accent-color), a) */
+.accent-blue { --accent-color: 59 130 246; }
+.accent-green { --accent-color: 34 197 94; }
+.accent-purple { --accent-color: 168 85 247; }
+.accent-red { --accent-color: 239 68 68; }
 </style>
