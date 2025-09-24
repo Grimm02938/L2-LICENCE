@@ -16,12 +16,14 @@ defineProps<{ title: string; description?: string; icon?: string; accent?: 'purp
 </template>
 
 <style scoped>
-.card{ border:1px solid var(--border-color); border-radius:.75rem; padding:1rem; background: rgba(17,24,39,.6); }
-.card-header{ display:flex; align-items:center; gap:.5rem; font-weight:700; margin-bottom:.35rem }
+.card{ border:1px solid var(--border-color); border-radius:var(--radius); padding:1rem; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0)), rgba(17,24,39,.6); }
+.card-header{ display:flex; align-items:center; gap:.5rem; font-weight:700; margin-bottom:.35rem; }
+.card-header h2{ font-size:1.05rem; }
+.icon{ display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:999px; background: rgba(122,162,247,.15); border:1px solid rgba(122,162,247,.35) }
 .desc{ opacity:.85; margin:.25rem 0 1rem }
 .body{ display:grid; gap:.75rem }
-.purple{ box-shadow: inset 0 0 0 1px rgba(168, 85, 247, .35) }
-.green{ box-shadow: inset 0 0 0 1px rgba(34, 197, 94, .35) }
-.yellow{ box-shadow: inset 0 0 0 1px rgba(234, 179, 8, .35) }
-.blue{ box-shadow: inset 0 0 0 1px rgba(59, 130, 246, .35) }
+.purple{ box-shadow: inset 0 0 0 1px rgba(192,153,255,.45) }
+.green{ box-shadow: inset 0 0 0 1px rgba(110,231,183,.45) }
+.yellow{ box-shadow: inset 0 0 0 1px rgba(250,204,21,.45) }
+.blue{ box-shadow: inset 0 0 0 1px rgba(122,162,247,.45) }
 </style>

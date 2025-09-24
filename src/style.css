@@ -251,3 +251,77 @@ button:focus-visible {
 .badge.accent {
   background: var(--accent);
 }
+
+/* =====================
+   Design V2 — Overrides
+   ===================== */
+:root {
+  /* Softer, modern dark palette */
+  --dark-bg: #0b0f17;
+  --darker-bg: #090d14;
+  --card-bg: #0f1521;
+  --border-color: #1b2533;
+  --text-primary: #e6edf3;
+  --text-secondary: #99a7b8;
+  --primary: #7aa2f7;      /* pastel blue */
+  --primary-dark: #5b86e5;
+  --primary-light: #a6c1ff;
+  --accent: #c099ff;       /* soft purple */
+  --success: #6ee7b7;
+  --warning: #facc15;
+  --danger: #fb7185;
+  --radius: 12px;
+}
+
+body { background-color: var(--dark-bg); }
+
+/* Headings: remove gradient, keep clarity */
+h1, h2, h3, h4, h5, h6 {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  color: var(--text-primary) !important;
+  letter-spacing: 0.2px;
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0)) , var(--card-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.02), 0 12px 24px rgba(0,0,0,0.35);
+}
+
+/* Chips */
+.chip {
+  background: rgba(148, 163, 184, 0.10);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  color: var(--text-primary);
+}
+
+/* Subtle link */
+a { color: #9bb6ff; }
+a:hover { color: #c2d0ff; }
+
+/* Sidebar explorer modern look */
+.explorer {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0)), var(--darker-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+}
+.search input {
+  background: #0e1420;
+  border-color: #223045;
+}
+.label { color: var(--text-secondary); }
+.label.clickable { color: var(--text-primary); }
+.label.clickable:hover { background: rgba(124, 139, 161, 0.12); }
+.children { border-left-color: #223045; }
+
+/* Tiles on home */
+.tiles .tile {
+  border-radius: var(--radius);
+  border-color: #213147;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0)), #0f1521;
+}
+.tiles .tile:hover { border-color: #33507a; }
+

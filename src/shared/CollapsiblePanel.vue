@@ -19,9 +19,9 @@ const open = ref(true)
 </template>
 
 <style scoped>
-.panel{ border:1px solid var(--border-color); background: rgba(16, 23, 42, .5); border-radius:.75rem; overflow:hidden; }
+.panel{ border:1px solid var(--border-color); background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)), rgba(16, 23, 42, .5); border-radius: var(--radius); overflow:hidden; }
 .panel-header{ display:flex; align-items:center; gap:.5rem; padding:.75rem 1rem; cursor:pointer; font-weight:600 }
-.icon{ opacity:.8 }
+.icon{ opacity:.85; font-size:.95rem }
 .chev{ margin-left:auto; opacity:.7 }
 .panel-body{ padding: .5rem 1rem 1rem }
 </style>
