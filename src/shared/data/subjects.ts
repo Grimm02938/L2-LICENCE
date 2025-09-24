@@ -38,7 +38,7 @@ export const subjects: Subject[] = [
   },
   {
     slug: 'topologie-1',
-    title: 'Topologie 1',
+    title: 'Topologie',
     description: 'Voisinages, ouverts, fermés, continuité topologique.',
     iconKey: 'topology',
     accent: 'green',
