@@ -24,4 +24,8 @@ const open = ref(true)
 .icon{ opacity:.85; font-size:.95rem }
 .chev{ margin-left:auto; opacity:.7 }
 .panel-body{ padding: .5rem 1rem 1rem; color: var(--text-primary); }
+.panel.purple{ background: rgba(192,153,255,.06) }
+.panel.green{ background: rgba(110,231,183,.06) }
+.panel.yellow{ background: rgba(250,204,21,.06) }
+.panel.blue{ background: rgba(122,162,247,.06) }
 </style>

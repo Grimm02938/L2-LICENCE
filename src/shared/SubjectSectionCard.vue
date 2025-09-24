@@ -22,8 +22,8 @@ defineProps<{ title: string; description?: string; icon?: string; accent?: 'purp
 .icon{ display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:999px; background: rgba(122,162,247,.15); border:1px solid rgba(122,162,247,.35) }
 .desc{ opacity:.85; margin:.25rem 0 1rem }
 .body{ display:grid; gap:.75rem }
-.purple{ box-shadow: inset 0 0 0 1px rgba(192,153,255,.45) }
-.green{ box-shadow: inset 0 0 0 1px rgba(110,231,183,.45) }
-.yellow{ box-shadow: inset 0 0 0 1px rgba(250,204,21,.45) }
-.blue{ box-shadow: inset 0 0 0 1px rgba(122,162,247,.45) }
+.purple{ box-shadow: inset 0 0 0 1px rgba(192,153,255,.45); background: rgba(192,153,255,.08); }
+.green{ box-shadow: inset 0 0 0 1px rgba(110,231,183,.45); background: rgba(110,231,183,.08); }
+.yellow{ box-shadow: inset 0 0 0 1px rgba(250,204,21,.45); background: rgba(250,204,21,.08); }
+.blue{ box-shadow: inset 0 0 0 1px rgba(122,162,247,.45); background: rgba(122,162,247,.08); }
 </style>

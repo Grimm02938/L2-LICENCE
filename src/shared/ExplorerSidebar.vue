@@ -52,4 +52,7 @@ export default defineComponent({ name: 'ExplorerSidebar' })
 .label.clickable{ cursor:pointer }
 .label.clickable:hover{ background: rgba(148,163,184,.12) }
 .children{ margin-left: .75rem; border-left:1px dashed var(--border-color); padding-left:.5rem }
+@media (max-width: 768px){
+  .explorer{ display:none }
+}
 </style>

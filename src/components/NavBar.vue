@@ -13,7 +13,7 @@ const toggleMenu = () => {
     <div class="container">
       <nav class="navbar">
         <div class="navbar-brand">
-          <a href="#" class="logo">L2<span class="highlight">LICENCE</span></a>
+          <a href="#/" class="logo"><span class="symbol">∑</span> L2 <span class="highlight">MATHS</span></a>
         </div>
         
         <button class="mobile-menu-button" @click="toggleMenu" aria-label="Menu">
@@ -28,10 +28,6 @@ const toggleMenu = () => {
             <a href="#courses" class="nav-link">Cours</a>
             <a href="#schedule" class="nav-link">Emploi du temps</a>
             <a href="#resources" class="nav-link">Ressources</a>
-          </div>
-          
-          <div class="navbar-end">
-            <button class="ghost-button">Se connecter</button>
           </div>
         </div>
       </nav>
@@ -91,6 +87,8 @@ const toggleMenu = () => {
   margin-left: 2px;
 }
 
+.symbol { margin-right: .5rem; filter: drop-shadow(0 2px 6px rgba(122,162,247,.35)); }
+
 .navbar-menu {
   display: flex;
   align-items: center;
@@ -113,9 +111,7 @@ const toggleMenu = () => {
   color: var(--text-primary);
 }
 
-.navbar-end {
-  margin-left: 1rem;
-}
+
 
 .mobile-menu-button {
   display: none;
