@@ -5,10 +5,10 @@
   --primary-dark: #0095dd;
   --primary-light: #33bbff;
   --accent: #ff3e7f;
-  --dark-bg: #0a0e17;
-  --darker-bg: #060a12;
-  --card-bg: #111927;
-  --text-primary: #f1f5f9;
+    --dark-bg: #111827;      /* lighter than before */
+    --darker-bg: #0f1624;
+    --card-bg: #151e2d;      /* slightly brighter cards */
+    --border-color: #253246;  /* softer border */
   --text-secondary: #94a3b8;
   --border-color: #1e293b;
   --success: #00d26a;

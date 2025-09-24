@@ -18,10 +18,10 @@
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
-  background: radial-gradient(1200px 800px at 10% 20%, rgba(80, 120, 255, 0.07), transparent 60%),
-              radial-gradient(1000px 700px at 80% 10%, rgba(255, 80, 180, 0.06), transparent 60%),
-              radial-gradient(900px 900px at 70% 80%, rgba(50, 200, 160, 0.05), transparent 60%),
-              #0b0f1a;
+  background: radial-gradient(1200px 800px at 10% 20%, rgba(80, 120, 255, 0.05), transparent 60%),
+              radial-gradient(1000px 700px at 80% 10%, rgba(255, 80, 180, 0.045), transparent 60%),
+              radial-gradient(900px 900px at 70% 80%, rgba(50, 200, 160, 0.04), transparent 60%),
+              #0f1626;
 }
 
 .stars, .twinkle, .nebula {
