@@ -27,9 +27,9 @@ function iconName(slug: string){
         :title="s.name"
         :icon-name="iconName(s.slug)"
         :accent="s.accent === 'purple' ? 'purple' : s.accent"
-      >
-        <p>Cette section regroupe les cours de {{ s.name }}.</p>
-      </CollapsiblePanel>
+        :toggle="false"
+        @header-click="$router.push('/matiere/' + s.slug)"
+      />
     </div>
   </PageLayout>
 </template>

@@ -1,22 +1,24 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Icon from './Icon.vue'
-const props = withDefaults(defineProps<{ title: string; iconName?: string; accent?: 'green'|'blue'|'purple'|'yellow'|'red' }>(), {
-  accent: 'blue'
+const props = withDefaults(defineProps<{ title: string; iconName?: string; accent?: 'green'|'blue'|'purple'|'yellow'|'red'; toggle?: boolean }>(), {
+  accent: 'blue',
+  toggle: true,
 })
+const emit = defineEmits<{ (e: 'header-click'): void }>()
 const open = ref(true)
 </script>
 
 <template>
   <section class="panel" :data-accent="props.accent" :class="{ open }">
-    <header class="panel-header" @click="open = !open">
+    <header class="panel-header" @click="emit('header-click'); if (props.toggle) open = !open">
       <span class="tag">
         <Icon v-if="props.iconName" :name="props.iconName" :size="16" />
         <span class="tag-text">{{ title }}</span>
-        <span class="chev">{{ open ? '▾' : '▸' }}</span>
+        <span v-if="props.toggle" class="chev">{{ open ? '▾' : '▸' }}</span>
       </span>
     </header>
-    <div class="panel-body" v-show="open">
+    <div class="panel-body" v-show="props.toggle ? open : true">
       <slot />
     </div>
   </section>

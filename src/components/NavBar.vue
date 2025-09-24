@@ -132,12 +132,13 @@ const toggleMenu = () => {
     right: 0;
     bottom: 0;
     flex-direction: column;
-    background: var(--dark-bg);
+    background: rgba(15, 22, 38, 0.96);
+    backdrop-filter: blur(8px);
     align-items: flex-start;
     padding: 2rem;
     transform: translateX(100%);
     transition: transform 0.3s ease;
-    z-index: 99;
+    z-index: 999;
   }
   
   .navbar-menu.is-active {
