@@ -263,18 +263,18 @@ button:focus-visible {
    ===================== */
 :root {
   /* Softer, modern dark palette */
-  --dark-bg: #0f1422;     /* slightly lighter */
-  --darker-bg: #0d1220;
-  --card-bg: #121a2a;     /* lifted card brightness */
-  --border-color: #223047; /* clearer border */
+  --dark-bg: #0f172a;     /* lighter, slate-like */
+  --darker-bg: #0d1526;
+  --card-bg: #111b2e;     /* lifted card brightness */
+  --border-color: #213147; /* clearer border */
   --text-primary: #e6edf3;
   --text-secondary: #99a7b8;
   --primary: #7aa2f7;      /* pastel blue */
   --primary-dark: #5b86e5;
   --primary-light: #a6c1ff;
-  --accent: #c099ff;       /* soft purple */
+  --accent: #a78bfa;       /* softer purple */
   --success: #6ee7b7;
-  --warning: #facc15;
+  --warning: #eab308;      /* toned yellow */
   --danger: #fb7185;
   --radius: 12px;
 }
@@ -308,6 +308,10 @@ h1, h2, h3, h4, h5, h6 {
 a { color: #9bb6ff; }
 a:hover { color: #c2d0ff; }
 
+/* Mobile nav visibility */
+.navbar-menu .nav-link { color: var(--text-primary); }
+.navbar-menu .nav-link:hover { color: var(--primary-light); }
+
 /* Sidebar explorer modern look */
 .explorer {
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0)), var(--darker-bg);
@@ -337,4 +341,9 @@ a:hover { text-shadow: 0 0 8px rgba(122,162,247,.25); }
 /* Scroll reveal base (optional utility) */
 .reveal { opacity: 0; transform: translateY(8px); transition: opacity .6s ease, transform .6s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Global box sizing and scroll control */
+*, *::before, *::after { box-sizing: border-box; }
+.no-scroll { overflow: hidden !important; }
+img, svg { max-width: 100%; height: auto; }
 

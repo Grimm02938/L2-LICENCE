@@ -55,7 +55,7 @@ export const subjects: Subject[] = [
   {
     slug: 'algebre-lineaire',
     name: 'Algèbre linéaire',
-    accent: 'yellow',
+    accent: 'blue',
     iconKey: 'matrix',
     sections: [
       { id: 'matrices', title: 'Matrices et applications linéaires', groups: [

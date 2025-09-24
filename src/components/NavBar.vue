@@ -1,12 +1,17 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import Logo from './Logo.vue'
 
 const isMenuOpen = ref(false);
 
-const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value;
-};
+const toggleMenu = () => { isMenuOpen.value = !isMenuOpen.value };
+const closeMenu = () => { isMenuOpen.value = false };
+
+watch(isMenuOpen, (open) => {
+  if (typeof document !== 'undefined') {
+    document.body.classList.toggle('no-scroll', open);
+  }
+});
 </script>
 
 <template>
@@ -31,10 +36,10 @@ const toggleMenu = () => {
         
         <div class="navbar-menu" :class="{ 'is-active': isMenuOpen }">
           <div class="nav-links">
-            <a href="#" class="nav-link active">Accueil</a>
-            <a href="#courses" class="nav-link">Cours</a>
-            <a href="#schedule" class="nav-link">Emploi du temps</a>
-            <a href="#resources" class="nav-link">Ressources</a>
+            <a href="#" class="nav-link active" @click="closeMenu">Accueil</a>
+            <a href="#courses" class="nav-link" @click="closeMenu">Cours</a>
+            <a href="#schedule" class="nav-link" @click="closeMenu">Emploi du temps</a>
+            <a href="#resources" class="nav-link" @click="closeMenu">Ressources</a>
           </div>
         </div>
       </nav>
