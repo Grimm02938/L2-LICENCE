@@ -1,83 +1,26 @@
-<script setup lang="ts">
-// No props; purely decorative background layer
-</script>
-
 <template>
-  <div class="cosmic-bg" aria-hidden="true">
-    <div class="stars" />
-    <div class="twinkle" />
-    <div class="nebula" />
-  </div>
-  
+	<div class="cosmic" aria-hidden="true">
+		<div class="nebula n1"></div>
+		<div class="nebula n2"></div>
+		<div class="stars"></div>
+	</div>
 </template>
 
 <style scoped>
-.cosmic-bg {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  overflow: hidden;
-  pointer-events: none;
-  background: radial-gradient(1200px 800px at 10% 20%, rgba(80, 120, 255, 0.05), transparent 60%),
-              radial-gradient(1000px 700px at 80% 10%, rgba(255, 80, 180, 0.045), transparent 60%),
-              radial-gradient(900px 900px at 70% 80%, rgba(50, 200, 160, 0.04), transparent 60%),
-              #0f1626;
-}
+.cosmic { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+.nebula { position:absolute; filter: blur(80px); opacity:.12; mix-blend-mode: screen; }
+.n1 { width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(59,130,246,.4), transparent 60%); top:-10%; left:-10%; animation: float1 18s ease-in-out infinite alternate; }
+.n2 { width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(99,102,241,.35), transparent 60%); bottom:-15%; right:-10%; animation: float2 22s ease-in-out infinite alternate; }
+.stars { position:absolute; inset:0; background-image: radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.2), transparent), radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,.15), transparent), radial-gradient(1.5px 1.5px at 40% 80%, rgba(255,255,255,.12), transparent); background-repeat:no-repeat; animation: twinkle 6s linear infinite; opacity:.35 }
 
-.stars, .twinkle, .nebula {
-  position: absolute;
-  inset: 0;
-}
+@keyframes float1 { from { transform: translateY(0) } to { transform: translateY(20px) } }
+@keyframes float2 { from { transform: translateX(0) } to { transform: translateX(-25px) } }
+@keyframes twinkle { 0%,100% { opacity:.35 } 50% { opacity:.25 } }
 
-/* Base star field using multiple tiny radial gradients */
-.stars {
-  background-image:
-    radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.7), rgba(255,255,255,0)),
-    radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,0.8), rgba(255,255,255,0)),
-    radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,0.6), rgba(255,255,255,0)),
-    radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,0.7), rgba(255,255,255,0)),
-    radial-gradient(1px 1px at 10% 90%, rgba(255,255,255,0.6), rgba(255,255,255,0)),
-    radial-gradient(1px 1px at 90% 50%, rgba(255,255,255,0.75), rgba(255,255,255,0));
-  background-repeat: no-repeat;
-  animation: drift 120s linear infinite;
-}
-
-/* Slight twinkling overlay */
-.twinkle {
-  background-image:
-    radial-gradient(1.5px 1.5px at 25% 25%, rgba(255,255,255,0.8), rgba(255,255,255,0)),
-    radial-gradient(1.5px 1.5px at 75% 65%, rgba(255,255,255,0.9), rgba(255,255,255,0)),
-    radial-gradient(1.5px 1.5px at 55% 35%, rgba(255,255,255,0.8), rgba(255,255,255,0));
-  background-repeat: no-repeat;
-  mix-blend-mode: screen;
-  animation: twinkle 6s ease-in-out infinite alternate;
-}
-
-/* Soft moving nebula fog */
-.nebula {
-  background: radial-gradient(800px 600px at 30% 70%, rgba(120, 200, 255, 0.05), transparent 65%),
-              radial-gradient(600px 600px at 70% 40%, rgba(255, 160, 220, 0.05), transparent 60%);
-  filter: blur(20px) saturate(120%);
-  animation: flow 60s ease-in-out infinite alternate;
-}
-
-@keyframes drift {
-  from { transform: translate3d(0,0,0); }
-  to   { transform: translate3d(-2%, -2%, 0); }
-}
-
-@keyframes twinkle {
-  0%, 100% { opacity: 0.25; }
-  50% { opacity: 0.5; }
-}
-
-@keyframes flow {
-  0% { transform: translate3d(0,0,0) scale(1); }
-  100% { transform: translate3d(1%, -1%, 0) scale(1.02); }
-}
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .stars, .twinkle, .nebula { animation: none !important; }
+@media (max-width: 768px) {
+	.nebula { opacity:.08; filter: blur(70px); }
+	.n1 { width: 80vw; height: 80vw; }
+	.n2 { width: 70vw; height: 70vw; }
+	.stars { opacity:.25 }
 }
 </style>

@@ -1,20 +1,19 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-const Home = () => import('../pages/Home.vue')
-const CoursTD = () => import('../pages/MPSI/Mathematiques/CoursTD.vue')
-
-const SubjectPage = () => import('../pages/SubjectPage.vue')
+import Home from '../pages/Home.vue'
+import SubjectPage from '../pages/SubjectPage.vue'
 
 const routes = [
   { path: '/', name: 'home', component: Home },
-  { path: '/MPSI/Mathematiques/Cours_TD', name: 'coursTD', component: CoursTD },
-  { path: '/matiere/:slug', name: 'subject', component: SubjectPage },
+  { path: '/matiere/:slug', name: 'subject', component: SubjectPage, props: true },
 ]
 
 export const router = createRouter({
   history: createWebHashHistory(),
   routes,
-  scrollBehavior() { return { top: 0 } },
+  scrollBehavior() {
+    return { top: 0 }
+  },
 })
 
 export default router

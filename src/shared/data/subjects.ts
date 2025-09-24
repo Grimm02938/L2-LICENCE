@@ -1,79 +1,45 @@
 export type Subject = {
   slug: string
-  name: string
-  accent: 'purple'|'green'|'yellow'|'blue'
-  iconKey?: 'sigma'|'matrix'|'function'|'integers'|'topology'|'python'
-  sections: {
-    id: string
-    title: string
-    description?: string
-    groups: {
-      id: string
-      title: string
-      links: { label: string; href: string }[]
-    }[]
-  }[]
+  title: string
+  description: string
+  iconKey: string
+  accent: 'blue' | 'green' | 'purple' | 'red'
 }
 
 export const subjects: Subject[] = [
   {
-    slug: 'topologie-1',
-    name: 'Topologie 1',
-    accent: 'purple',
-    iconKey: 'topology',
-    sections: [
-      { id: 'intro', title: 'Bases de la topologie', description: 'Ouverts, fermés, adhérences.', groups: [
-        { id: 'cours', title: 'Cours', links: [ { label: 'Chapitre : Ouvrir', href: '#' } ] },
-        { id: 'td', title: 'TD', links: [ { label: 'Énoncé : Ouvrir', href: '#' }, { label: 'Correction : Ouvrir', href: '#' } ] },
-      ]}
-    ]
-  },
-  {
-    slug: 'calcul-numerique',
-    name: 'Calcul Numérique',
-    accent: 'green',
-    iconKey: 'python',
-    sections: [
-      { id: 'approx', title: 'Approximation et erreurs', description: 'Erreurs absolues et relatives.', groups: [
-        { id: 'cours', title: 'Cours', links: [ { label: 'Chapitre : Ouvrir', href: '#' } ] },
-        { id: 'td', title: 'TD', links: [ { label: 'Énoncé : Ouvrir', href: '#' }, { label: 'Correction : Ouvrir', href: '#' } ] },
-      ]}
-    ]
+    slug: 'algebre-lineaire',
+    title: 'Algèbre linéaire',
+    description: "Espaces vectoriels, applications linéaires, matrices et déterminants.",
+    iconKey: 'matrix',
+    accent: 'blue', // was yellow; switched to blue
   },
   {
     slug: 'analyse',
-    name: 'Analyse',
-    accent: 'blue',
+    title: 'Analyse',
+    description: 'Suites, séries, continuité, dérivabilité, intégration.',
     iconKey: 'function',
-    sections: [
-      { id: 'series', title: 'Séries et convergence', groups: [
-        { id: 'cours', title: 'Cours', links: [ { label: 'Chapitre : Ouvrir', href: '#' } ] },
-        { id: 'td', title: 'TD', links: [ { label: 'Énoncé : Ouvrir', href: '#' }, { label: 'Correction : Ouvrir', href: '#' } ] },
-      ]}
-    ]
-  },
-  {
-    slug: 'algebre-lineaire',
-    name: 'Algèbre linéaire',
-    accent: 'blue',
-    iconKey: 'matrix',
-    sections: [
-      { id: 'matrices', title: 'Matrices et applications linéaires', groups: [
-        { id: 'cours', title: 'Cours', links: [ { label: 'Chapitre : Ouvrir', href: '#' } ] },
-        { id: 'td', title: 'TD', links: [ { label: 'Énoncé : Ouvrir', href: '#' }, { label: 'Correction : Ouvrir', href: '#' } ] },
-      ]}
-    ]
+    accent: 'purple',
   },
   {
     slug: 'arithmetique',
-    name: 'Arithmétique',
-    accent: 'purple',
+    title: 'Arithmétique',
+    description: 'Entiers, divisibilité, congruences, théorèmes classiques.',
     iconKey: 'integers',
-    sections: [
-      { id: 'div', title: 'Divisibilité et congruences', groups: [
-        { id: 'cours', title: 'Cours', links: [ { label: 'Chapitre : Ouvrir', href: '#' } ] },
-        { id: 'td', title: 'TD', links: [ { label: 'Énoncé : Ouvrir', href: '#' }, { label: 'Correction : Ouvrir', href: '#' } ] },
-      ]}
-    ]
+    accent: 'red',
+  },
+  {
+    slug: 'topologie-1',
+    title: 'Topologie 1',
+    description: 'Voisinages, ouverts, fermés, continuité topologique.',
+    iconKey: 'topology',
+    accent: 'green',
+  },
+  {
+    slug: 'calcul-numerique',
+    title: 'Calcul Numérique',
+    description: 'Méthodes numériques pour équations et intégration.',
+    iconKey: 'code',
+    accent: 'blue',
   },
 ]

@@ -1,31 +1,22 @@
 <script setup lang="ts">
-const props = withDefaults(defineProps<{ name: string; size?: number; color?: string }>(), {
-  size: 18,
-})
+defineProps<{ name: string; class?: string }>()
 
-const icons: Record<string, string> = {
-  sigma: '<path d="M5 3h14v3H9l6 6-6 6h10v3H5l7-9L5 3Z"/>',
-  matrix: '<rect x="3" y="3" width="6" height="6" rx="1"/><rect x="11" y="3" width="6" height="6" rx="1"/><rect x="3" y="11" width="6" height="6" rx="1"/><rect x="11" y="11" width="6" height="6" rx="1"/>',
-  function: '<path d="M6 18c3 0 3-12 6-12h6" stroke-width="2" fill="none"/><circle cx="18" cy="6" r="1.5"/>',
-  integers: '<path d="M6 5v14h3l9-14v14" stroke-width="2" fill="none"/>',
-  topology: '<path d="M12 4c4.418 0 8 3.134 8 7s-3.582 7-8 7-8-3.134-8-7 3.582-7 8-7Zm0 0c3 3 3 11 0 14" stroke-width="2" fill="none"/>',
-  python: '<path d="M9 3h4a3 3 0 0 1 3 3v3H10a2 2 0 0 1-2-2V3Z"/><path d="M15 21h-4a3 3 0 0 1-3-3v-3h6a2 2 0 0 1 2 2v4Z"/><circle cx="13" cy="6" r="1" fill="currentColor"/>',
-  flask: '<path d="M10 3h4v2l4 6v6a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V11l4-6V3Z" fill="none" stroke-width="2"/><path d="M8 14h8" stroke-width="2"/>',
-  code: '<path d="M8 8 4 12l4 4" fill="none" stroke-width="2"/><path d="M16 8l4 4-4 4" fill="none" stroke-width="2"/>',
-  book: '<path d="M5 5h9a3 3 0 0 1 3 3v11H8a3 3 0 0 0-3 3V5Z" fill="none" stroke-width="2"/><path d="M17 19V8a3 3 0 0 1 3-3v14a3 3 0 0 0-3-0Z" fill="none" stroke-width="2"/>',
-  language: '<circle cx="12" cy="12" r="9" fill="none" stroke-width="2"/><path d="M3 12h18M12 3c3 3 3 15 0 18M6 6c4 2 8 2 12 0M6 18c4-2 8-2 12 0" fill="none" stroke-width="2"/>',
-  atom: '<circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="12" rx="9" ry="4" fill="none" stroke-width="2"/><ellipse cx="12" cy="12" rx="4" ry="9" fill="none" stroke-width="2"/>'
+const paths: Record<string, string> = {
+	function: 'M3 12c0-4.418 3.582-8 8-8h4v2h-4a6 6 0 0 0-6 6c0 3.314 2.686 6 6 6h4v2h-4c-4.418 0-8-3.582-8-8z',
+	matrix: 'M3 5h18v14H3V5zm2 2v3h4V7H5zm0 5v5h4v-5H5zm6-5v3h8V7h-8zm0 5v5h8v-5h-8z',
+	integers: 'M5 19V5h2v14H5zm6-10h8v2h-8v-2zm0 6h8v2h-8v-2z',
+	topology: 'M4 12a8 8 0 1 1 16 0 8 8 0 0 1-16 0zm8-6a6 6 0 1 0 0 12A6 6 0 0 0 12 6z',
+	book: 'M4 6a2 2 0 0 1 2-2h12v14H6a2 2 0 1 0 0 4h12v2H6a4 4 0 1 1 0-8h12V4H6a2 2 0 0 0-2 2z',
+	code: 'M9 18L3 12l6-6 1.5 1.5L6 12l4.5 4.5L9 18zm6 0l-1.5-1.5L18 12l-4.5-4.5L15 6l6 6-6 6z',
 }
-
-const svg = icons[props.name] ?? icons['function']
 </script>
 
 <template>
-  <svg :width="size" :height="size" viewBox="0 0 24 24" :style="{ color }" xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-    <g v-html="svg" />
-  </svg>
+	<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+		<path :d="paths[name] || ''" />
+	</svg>
 </template>
 
 <style scoped>
-svg { display: inline-block; vertical-align: middle }
+svg { display:inline-block }
 </style>

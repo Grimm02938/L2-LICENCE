@@ -1,41 +1,35 @@
 <script setup lang="ts">
-import PageLayout from '../shared/PageLayout.vue'
-import { subjects } from '../shared/data/subjects'
+import { useRouter } from 'vue-router'
 import CollapsiblePanel from '../shared/CollapsiblePanel.vue'
-function iconName(slug: string){
-  switch(slug){
-    case 'analyse': return 'function'
-    case 'algebre-lineaire': return 'matrix'
-    case 'arithmetique': return 'integers'
-    case 'topologie-1': return 'topology'
-    case 'calcul-numerique': return 'python'
-    default: return 'sigma'
-  }
+import { subjects } from '../shared/data/subjects'
+
+const router = useRouter()
+
+function goToSubject(slug: string) {
+	router.push({ name: 'subject', params: { slug } })
 }
 </script>
 
 <template>
-  <PageLayout>
-    <template #title>Bienvenue</template>
-    <p class="lead">Choisissez une matière pour accéder aux cours et TD.</p>
-
-    <h3 class="section-title">Matières :</h3>
-    <div class="category-list">
-      <CollapsiblePanel
-        v-for="s in subjects"
-        :key="s.slug"
-        :title="s.name"
-        :icon-name="iconName(s.slug)"
-        :accent="s.accent === 'purple' ? 'purple' : s.accent"
-        :toggle="false"
-        @header-click="$router.push('/matiere/' + s.slug)"
-      />
-    </div>
-  </PageLayout>
+	<section>
+		<h1>Matières</h1>
+		<div class="panels">
+			<CollapsiblePanel
+				v-for="s in subjects"
+				:key="s.slug"
+				:title="s.title"
+				:icon-name="s.iconKey"
+				:accent="s.accent"
+				:toggle="false"
+				@header-click="goToSubject(s.slug)"
+			>
+				<p class="desc">{{ s.description }}</p>
+			</CollapsiblePanel>
+		</div>
+	</section>
 </template>
 
 <style scoped>
-.lead{ color: var(--text-secondary); margin-bottom: 1rem }
-.section-title{ margin: 0 0 .75rem; font-size: 1.1rem; color: var(--text-secondary) }
-.category-list{ display: grid; gap: 1rem }
+.panels { display:flex; flex-direction: column; gap: 1rem; }
+.desc { color: var(--text-secondary); margin: .25rem 0 0; }
 </style>

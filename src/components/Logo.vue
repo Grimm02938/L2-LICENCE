@@ -1,25 +1,21 @@
-<script setup lang="ts">
-// Purely decorative logo mark (orbit + node)
-</script>
-
 <template>
-  <svg class="logo" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-    <defs>
-      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#7aa2f7"/>
-        <stop offset="100%" stop-color="#c099ff"/>
-      </linearGradient>
-    </defs>
-    <!-- Orbit ring -->
-    <ellipse cx="32" cy="32" rx="22" ry="12" fill="none" stroke="url(#g)" stroke-width="2.5"/>
-    <!-- Vertical ring -->
-    <ellipse cx="32" cy="32" rx="12" ry="22" fill="none" stroke="url(#g)" stroke-width="2.5" opacity="0.65"/>
-    <!-- Node -->
-    <circle cx="48" cy="28" r="4" fill="url(#g)"/>
-  </svg>
+	<span class="logo" aria-label="L2-Licence">
+		<svg viewBox="0 0 48 48" class="svg" role="img">
+			<defs>
+				<linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+					<stop offset="0%" stop-color="#60a5fa" />
+					<stop offset="100%" stop-color="#6366f1" />
+				</linearGradient>
+			</defs>
+			<circle cx="24" cy="24" r="14" fill="none" stroke="url(#g1)" stroke-width="2.5" />
+			<ellipse cx="24" cy="24" rx="20" ry="8" fill="none" stroke="rgba(96,165,250,.6)" stroke-width="1.5" transform="rotate(-20 24 24)" />
+			<circle cx="36" cy="18" r="3" fill="#60a5fa" />
+		</svg>
+	</span>
   
 </template>
 
 <style scoped>
-.logo { width: 32px; height: 32px; display: block; filter: drop-shadow(0 2px 10px rgba(122,162,247,.35)); }
+.logo { display:inline-flex; align-items:center; justify-content:center }
+.svg { width: 36px; height: 36px; display:block }
 </style>
