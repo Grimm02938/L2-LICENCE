@@ -263,10 +263,10 @@ button:focus-visible {
    ===================== */
 :root {
   /* Softer, modern dark palette */
-  --dark-bg: #0f172a;     /* lighter, slate-like */
-  --darker-bg: #0d1526;
-  --card-bg: #111b2e;     /* lifted card brightness */
-  --border-color: #213147; /* clearer border */
+  --dark-bg: #12151c;     /* grayer dark */
+  --darker-bg: #0f1319;
+  --card-bg: #151a23;     /* subtle gray cards */
+  --border-color: #283241; /* grayer border */
   --text-primary: #e6edf3;
   --text-secondary: #99a7b8;
   --primary: #7aa2f7;      /* pastel blue */
