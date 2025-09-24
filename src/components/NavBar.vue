@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import Logo from './Logo.vue'
 
 const isMenuOpen = ref(false);
 
@@ -13,7 +14,13 @@ const toggleMenu = () => {
     <div class="container">
       <nav class="navbar">
         <div class="navbar-brand">
-          <a href="#/" class="logo"><span class="symbol">∑</span> L2 <span class="highlight">MATHS</span></a>
+          <a href="#/" class="brand">
+            <Logo />
+            <span class="brand-text">
+              <span class="brand-title">L2-Licence</span>
+              <span class="brand-sub">Plateforme Pédagogique Mathématiques</span>
+            </span>
+          </a>
         </div>
         
         <button class="mobile-menu-button" @click="toggleMenu" aria-label="Menu">
@@ -57,37 +64,10 @@ const toggleMenu = () => {
   align-items: center;
 }
 
-.logo {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--text-primary);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-}
-
-.logo::before {
-  content: '';
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background: var(--primary);
-  margin-right: 8px;
-  border-radius: 50%;
-  box-shadow: 0 0 10px var(--primary);
-}
-
-.highlight {
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin-left: 2px;
-}
-
-.symbol { margin-right: .5rem; filter: drop-shadow(0 2px 6px rgba(122,162,247,.35)); }
+.brand { display:flex; align-items:center; gap:.75rem; color: var(--text-primary); text-decoration:none; }
+.brand-text { display:flex; flex-direction:column; line-height:1.1 }
+.brand-title { font-weight: 900; letter-spacing:.4px }
+.brand-sub { color: var(--text-secondary); font-size:.8rem }
 
 .navbar-menu {
   display: flex;
