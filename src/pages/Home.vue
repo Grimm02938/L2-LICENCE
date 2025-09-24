@@ -33,4 +33,6 @@ function goToSubject(slug: string) {
 <style scoped>
 .panels { display:flex; flex-direction: column; gap: 1rem; }
 .desc { color: var(--text-secondary); margin: .25rem 0 0; }
+h1 { font-size: 2.25rem; }
+@media (min-width: 768px) { h1 { font-size: 2.5rem } }
 </style>

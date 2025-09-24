@@ -42,16 +42,19 @@ function onHeaderClick() {
 /* Base panel styling */
 .panel {
   --accent-color: 59 130 246; /* default to blue RGB components */
-  border: 1px solid rgba(var(--accent-color), .35);
-  border-radius: 12px;
+	border: 1px solid rgba(var(--accent-color), .35);
+	border-radius: 16px;
   background:
     linear-gradient(0deg, rgba(var(--accent-color), .08), rgba(var(--accent-color), .08)),
     rgba(17,24,39,.65);
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.15);
+	box-shadow:
+		inset 0 0 0 1px rgba(0,0,0,.15),
+		0 6px 16px rgba(0,0,0,.25),
+		0 0 0 1px rgba(255,255,255,.02);
 }
 .header { width:100%; padding:.75rem; display:flex; align-items:center; background:transparent; border:none; color:var(--text-primary); cursor:pointer }
 .pill { display:inline-flex; align-items:center; gap:.5rem; padding:.35rem .6rem; border-radius: 999px; border:1px solid rgba(var(--accent-color), .35); background: rgba(var(--accent-color), .12) }
-.ttl { font-weight: 700 }
+.ttl { font-weight:800; text-transform: uppercase; letter-spacing: .02em }
 .caret { opacity:.7; margin-left:.35rem }
 .ic { width: 18px; height: 18px }
 .body { padding: 0 1rem 1rem 1rem; color: var(--text-secondary) }
