@@ -158,9 +158,9 @@ export const contentBySubject: Record<string, Chapter[]> = {
       semester: 1,
       sections: {
         cours: makeCours('/docs/topologie/chapitre-01-espaces-topologiques.pdf'),
-        td: placeholder(C:\Users\abdel\Downloads\Feuille1_R.pdf),
+        td: placeholder(),
         tdCorrige: placeholder(),
-        ds: placeholder(C:\Users\abdel\Downloads\Feuille1_R.pdf),
+        ds: placeholder(),
         dsCorrige: placeholder(),
       },
     },
