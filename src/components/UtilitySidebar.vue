@@ -1,6 +1,8 @@
 <template>
   <aside class="sidebar" aria-label="Informations pratiques">
-    <section class="card info">
+    <sectiPS C:\Users\abdel\OneDrive\Documents\GitHub\L2-LICENCE> git push origin main
+fatal: unable to access 'https://github.com/Grimm02938/L2-LICENCE.git/': Could not resolve 
+host: github.comon class="card info">
       <h2>Point rapide</h2>
       <p class="highlight">
         Dernière mise à jour le <strong>24 septembre</strong> avec une navigation raffinée et des
