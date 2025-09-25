@@ -23,18 +23,17 @@ import Logo from './Logo.vue'
   top: 0;
   z-index: 40;
   overflow: hidden;
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(16px);
   background: var(--nav-gradient);
-  box-shadow: inset 0 -1px 0 rgba(94, 117, 182, 0.25);
+  box-shadow: inset 0 -1px 0 rgba(43, 86, 160, 0.45);
 }
 
 .navbar-container::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, rgba(18, 33, 73, 0.8), rgba(11, 20, 44, 0.92) 60%, rgba(18, 33, 73, 0.85));
-  mix-blend-mode: screen;
-  opacity: 0.65;
+  background: linear-gradient(0deg, rgba(21, 45, 88, 0.4), rgba(11, 25, 52, 0.8));
+  opacity: 0.55;
   z-index: 0;
 }
 
@@ -89,26 +88,14 @@ import Logo from './Logo.vue'
   text-transform: uppercase;
 }
 
-.navbar::after {
-  content: '';
-  position: absolute;
-  inset: 60% -20% -180% -20%;
-  background: radial-gradient(circle at 20% 0%, rgba(89, 126, 255, 0.12), transparent 65%),
-    radial-gradient(circle at 88% 30%, rgba(255, 132, 209, 0.08), transparent 60%);
-  filter: blur(40px);
-  opacity: 0.6;
-  z-index: 0;
-  pointer-events: none;
-}
-
 .nav-orbit {
   position: absolute;
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 18% -40%, rgba(99, 126, 255, 0.4), transparent 62%),
-    radial-gradient(circle at 88% 10%, rgba(244, 114, 182, 0.28), transparent 58%);
-  opacity: 0.5;
+    radial-gradient(circle at 18% -40%, rgba(95, 136, 255, 0.35), transparent 60%),
+    radial-gradient(circle at 84% 8%, rgba(43, 96, 210, 0.24), transparent 58%);
+  opacity: 0.45;
   z-index: 1;
 }
 
