@@ -22,7 +22,7 @@ import Logo from './Logo.vue'
   position: sticky;
   top: 0;
   z-index: 40;
-  overflow: hidden;
+  width: 100%;
   backdrop-filter: blur(16px);
   background: var(--nav-gradient);
   box-shadow: inset 0 -1px 0 rgba(43, 86, 160, 0.45);
