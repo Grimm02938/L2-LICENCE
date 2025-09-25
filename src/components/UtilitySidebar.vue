@@ -24,10 +24,16 @@ const updates = [
 
 const contact = reactive({ email: '', subject: '', message: '' })
 const status = ref('')
+const statusKind = ref<'idle' | 'success' | 'error'>('idle')
+const sending = ref(false)
 const journalOpen = ref(false)
 
 const canSend = computed(
-  () => contact.email.trim().length > 0 && contact.subject.trim().length > 0 && contact.message.trim().length > 4,
+  () =>
+    !sending.value &&
+    contact.email.trim().length > 0 &&
+    contact.subject.trim().length > 0 &&
+    contact.message.trim().length > 4,
 )
 const encoded = 'YWRhbWUuYWJkZWxtb3VsYUB1bml2ZXJzaXRlLXBhcmlzLXNhY2xheS5mcg=='
 
@@ -42,18 +48,60 @@ function resetForm() {
   contact.message = ''
 }
 
-function sendContact() {
-  if (!canSend.value || typeof window === 'undefined') return
+function setStatus(kind: 'idle' | 'success' | 'error', message = '') {
+  statusKind.value = kind
+  status.value = message
+  if (kind !== 'idle' && typeof window !== 'undefined') {
+    window.setTimeout(() => {
+      statusKind.value = 'idle'
+      status.value = ''
+    }, 6000)
+  }
+}
+
+async function sendContact() {
+  if (!canSend.value) return
   const target = decodeRecipient()
-  if (!target) return
-  const params = new URLSearchParams({
-    subject: contact.subject.trim(),
-    body: `Expéditeur : ${contact.email}\n\n${contact.message}`,
-  })
-  window.location.href = `mailto:${target}?${params.toString()}`
-  status.value = 'Message prêt dans votre messagerie. L’envoi direct sera ajouté ultérieurement.'
-  resetForm()
-  window.setTimeout(() => (status.value = ''), 3600)
+  if (!target) {
+    setStatus('error', "Impossible de récupérer l'adresse de destination.")
+    return
+  }
+
+  try {
+    sending.value = true
+    setStatus('idle')
+
+    const endpoint = `https://formsubmit.co/ajax/${encodeURIComponent(target)}`
+    const payload = {
+      email: contact.email.trim(),
+      name: contact.subject.trim(),
+      message: contact.message.trim(),
+      _subject: `Plateforme L2 — ${contact.subject.trim()}`,
+      _template: 'box',
+    }
+
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+
+    if (!response.ok) throw new Error('send_failed')
+
+    resetForm()
+    setStatus('success', 'Message envoyé ! Pensez à valider FormSubmit la première fois.')
+  } catch (error) {
+    console.error('contact form error', error)
+    setStatus(
+      'error',
+      "L'envoi a échoué. Vérifiez votre connexion ou validez l'adresse sur formsubmit.co.",
+    )
+  } finally {
+    sending.value = false
+  }
 }
 
 function toggleJournal() {
@@ -86,30 +134,32 @@ function toggleJournal() {
       </section>
     </transition>
 
-    <section class="card links">
-      <h2>Navigation rapide</h2>
-      <router-link class="link" to="/emploi-du-temps">Consulter l'emploi du temps</router-link>
-    </section>
-
-    <section class="card contact">
-      <h2>Contacter la coordination</h2>
+    <section class="card contact modern-contact">
+      <h2>Contact</h2>
       <form @submit.prevent="sendContact">
-        <label>
-          <span>Email *</span>
-          <input v-model="contact.email" type="email" required placeholder="prenom.nom@universite.fr" />
-        </label>
-        <label>
-          <span>Objet *</span>
-          <input v-model="contact.subject" type="text" required />
-        </label>
-        <label class="textarea">
-          <span>Message *</span>
-          <textarea v-model="contact.message" rows="3" required></textarea>
-        </label>
-        <button type="submit" :disabled="!canSend">Préparer l'envoi</button>
+        <div class="form-row">
+          <label for="contact-email">Email *</label>
+          <input id="contact-email" v-model="contact.email" type="email" required autocomplete="email" placeholder="prenom.nom@universite.fr" />
+        </div>
+        <div class="form-row">
+          <label for="contact-subject">Objet *</label>
+          <input id="contact-subject" v-model="contact.subject" type="text" required placeholder="Ex. Question sur le TD 3" />
+        </div>
+        <div class="form-row">
+          <label for="contact-message">Message *</label>
+          <textarea id="contact-message" v-model="contact.message" rows="4" required placeholder="Décrivez votre demande"></textarea>
+        </div>
+        <button class="modern-btn" type="submit" :disabled="!canSend">
+          <span v-if="!sending">Envoyer</span>
+          <span v-else>Envoi…</span>
+        </button>
+        <div class="form-status">
+          <transition name="fade">
+            <span v-if="status" :class="['status', statusKind]">{{ status }}</span>
+          </transition>
+        </div>
+        <p class="footer-note">Le premier envoi déclenchera un email de confirmation FormSubmit.<br>Si rien ne se passe, vérifiez vos spams ou contactez-nous directement.</p>
       </form>
-      <p class="hint">L'email partira depuis votre messagerie. Une version avec envoi automatique est à l'étude.</p>
-      <p v-if="status" class="status">{{ status }}</p>
     </section>
   </aside>
 </template>
@@ -231,13 +281,6 @@ function toggleJournal() {
   color: #cfc4ff;
 }
 
-.links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.links h2,
 .contact h2 {
   font-size: 0.9rem;
   font-weight: 800;
@@ -247,93 +290,96 @@ function toggleJournal() {
   color: var(--text-primary);
 }
 
-.link {
-  display: block;
-  padding: 0.55rem 0.7rem;
-  border-radius: 12px;
-  background: rgba(59, 130, 246, 0.18);
+.contact h2 {
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.6rem;
   color: var(--text-primary);
-  font-weight: 600;
-  text-decoration: none;
-  transition: transform 0.18s ease, background 0.18s ease;
 }
 
-.link:hover {
-  transform: translateX(4px);
-  background: rgba(59, 130, 246, 0.28);
-}
 
-.contact form {
+.modern-contact form {
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
+  gap: 1.1rem;
+  background: linear-gradient(120deg, rgba(30,41,59,0.92) 60%, rgba(244,114,182,0.08) 100%);
+  border-radius: 18px;
+  padding: 1.1rem 1rem 1.2rem 1rem;
+  box-shadow: 0 8px 32px rgba(244,114,182,0.08);
 }
-
-label {
+.modern-contact .form-row {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  font-size: 0.78rem;
-  color: var(--text-secondary);
 }
-
-input,
-textarea {
-  background: rgba(15, 23, 42, 0.92);
-  border: 1px solid rgba(148, 163, 184, 0.25);
-  border-radius: 10px;
-  padding: 0.45rem 0.6rem;
-  color: var(--text-primary);
+.modern-contact label {
   font-size: 0.85rem;
-  transition: border 0.18s ease, box-shadow 0.18s ease;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.1rem;
 }
-
-input:focus,
-textarea:focus {
+.modern-contact input,
+.modern-contact textarea {
+  background: rgba(15, 23, 42, 0.98);
+  border: 1.5px solid rgba(244,114,182,0.18);
+  border-radius: 10px;
+  padding: 0.55rem 0.7rem;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: border 0.18s, box-shadow 0.18s;
+  font-family: inherit;
+}
+.modern-contact input:focus,
+.modern-contact textarea:focus {
   outline: none;
-  border-color: rgba(99, 102, 241, 0.6);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  border-color: #f472b6;
+  box-shadow: 0 0 0 2px #f472b633;
 }
-
-textarea {
+.modern-contact textarea {
   resize: vertical;
   min-height: 90px;
 }
-
-button {
+.modern-btn {
   border: none;
   border-radius: 999px;
-  padding: 0.55rem 0.8rem;
-  font-weight: 700;
-  font-size: 0.82rem;
-  color: #0b1220;
-  background: linear-gradient(135deg, #60a5fa, #7c3aed);
+  padding: 0.7rem 1.2rem;
+  font-weight: 800;
+  font-size: 1rem;
+  color: #fff;
+  background: linear-gradient(90deg, #f472b6 0%, #6366f1 100%);
   cursor: pointer;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 4px 18px rgba(244,114,182,0.13);
+  transition: background 0.18s, transform 0.18s, box-shadow 0.18s;
 }
-
-button:disabled {
+.modern-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
 }
-
-button:not(:disabled):hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 25px rgba(79, 70, 229, 0.35);
+.modern-btn:not(:disabled):hover {
+  background: linear-gradient(90deg, #6366f1 0%, #f472b6 100%);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(244,114,182,0.18);
 }
-
-.hint {
-  margin-top: 0.6rem;
-  font-size: 0.74rem;
-  opacity: 0.75;
+.form-status {
+  min-height: 1.2em;
+  margin-top: 0.2em;
 }
-
-.status {
-  margin-top: 0.4rem;
-  font-size: 0.75rem;
+.status.success {
   color: #bbf7d0;
+}
+.status.error {
+  color: #fca5a5;
+}
+.footer-note {
+  margin-top: 0.7rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  opacity: 0.8;
+  text-align: center;
 }
 
 .fade-enter-active,

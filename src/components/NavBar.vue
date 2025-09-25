@@ -36,9 +36,14 @@ watch(isMenuOpen, (open) => {
         </button>
         
         <div class="navbar-menu" :class="{ 'is-active': isMenuOpen }">
-          <div class="nav-links">
+          <div class="nav-links creative-nav">
             <a href="#" class="nav-link active" @click="closeMenu">Accueil</a>
-            <a href="#courses" class="nav-link" @click="closeMenu">Cours</a>
+          </div>
+          <div class="navbar-decor">
+            <span class="nav-gradient"></span>
+            <span class="nav-dot"></span>
+            <span class="nav-dot nav-dot2"></span>
+            <span class="nav-dot nav-dot3"></span>
           </div>
         </div>
       </nav>
@@ -162,5 +167,52 @@ watch(isMenuOpen, (open) => {
     margin-left: 0;
     margin-top: 2rem;
   }
+}
+/* Creative nav bar design */
+.creative-nav {
+  position: relative;
+  z-index: 2;
+}
+.navbar-decor {
+  position: absolute;
+  right: 2.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  pointer-events: none;
+}
+.nav-gradient {
+  display: block;
+  width: 90px;
+  height: 8px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #f472b6 0%, #6366f1 100%);
+  opacity: 0.18;
+  margin-right: 0.5rem;
+}
+.nav-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #f472b6;
+  box-shadow: 0 0 12px 2px #f472b6aa;
+  opacity: 0.7;
+  animation: navDotPulse 2.5s infinite alternate;
+}
+.nav-dot2 {
+  background: #6366f1;
+  box-shadow: 0 0 12px 2px #6366f1aa;
+  animation-delay: 0.7s;
+}
+.nav-dot3 {
+  background: #fbbf24;
+  box-shadow: 0 0 12px 2px #fbbf24aa;
+  animation-delay: 1.2s;
+}
+@keyframes navDotPulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.25); opacity: 1; }
 }
 </style>

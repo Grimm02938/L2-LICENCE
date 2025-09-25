@@ -32,9 +32,9 @@ export const subjects: Subject[] = [
     title: 'Arithmétique',
     description: "Cette section regroupe les cours d'Arithmétique (Fahlaoui).",
     iconKey: 'integers',
-    accent: 'orange',
-    accentRgb: '249 115 22',
-    accentHex: '#f97316',
+    accent: 'red',
+    accentRgb: '244 114 182', // pastel red
+    accentHex: '#f472b6',
   },
   {
     slug: 'topologie-1',
