@@ -154,10 +154,21 @@ export const contentBySubject: Record<string, Chapter[]> = {
   ],
   'topologie-1': [
     {
-      title: 'Chapitre 1 — Espaces métriques',
+      title: 'Chapitre 1 — Suites',
       semester: 1,
       sections: {
-        cours: makeCours('/docs/topologie/chapitre-01-espaces-metriques.pdf'),
+        cours: makeCours('/docs/topologie/chapitre-01-espaces-topologiques.pdf'),
+        td: placeholder(C:\Users\abdel\Downloads\Feuille1_R.pdf),
+        tdCorrige: placeholder(),
+        ds: placeholder(C:\Users\abdel\Downloads\Feuille1_R.pdf),
+        dsCorrige: placeholder(),
+      },
+    },
+    {
+      title: 'Chapitre 2 — Fonctions continues et homéomorphismes',
+      semester: 1,
+      sections: {
+        cours: makeCours('/docs/topologie/chapitre-02-continuite.pdf'),
         td: placeholder(),
         tdCorrige: placeholder(),
         ds: placeholder(),
@@ -165,21 +176,32 @@ export const contentBySubject: Record<string, Chapter[]> = {
       },
     },
     {
-      title: 'Chapitre 2 — Topologies et ouverts',
-      semester: 1,
-      sections: {
-        cours: makeCours('/docs/topologie/chapitre-02-ouverts.pdf'),
-        td: placeholder(),
-        tdCorrige: placeholder(),
-        ds: placeholder(),
-        dsCorrige: placeholder(),
-      },
-    },
-    {
-      title: 'Chapitre 3 — Continuité et compacité',
+      title: 'Chapitre 3 — Compacité',
       semester: 2,
       sections: {
-        cours: makeCours('/docs/topologie/chapitre-03-continuites.pdf'),
+        cours: makeCours('/docs/topologie/chapitre-03-compacite.pdf'),
+        td: placeholder(),
+        tdCorrige: placeholder(),
+        ds: placeholder(),
+        dsCorrige: placeholder(),
+      },
+    },
+    {
+      title: 'Chapitre 4 — Connexité',
+      semester: 2,
+      sections: {
+        cours: makeCours('/docs/topologie/chapitre-04-connexite.pdf'),
+        td: placeholder(),
+        tdCorrige: placeholder(),
+        ds: placeholder(),
+        dsCorrige: placeholder(),
+      },
+    },
+    {
+      title: 'Chapitre 5 — Espaces métriques',
+      semester: 2,
+      sections: {
+        cours: makeCours('/docs/topologie/chapitre-05-espaces-metriques.pdf'),
         td: placeholder(),
         tdCorrige: placeholder(),
         ds: placeholder(),
