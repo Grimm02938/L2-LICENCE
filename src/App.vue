@@ -35,8 +35,8 @@ import CosmicBackground from './shared/CosmicBackground.vue'
 </template>
 
 <style scoped>
-.app-wrapper { display:flex; flex-direction:column; min-height:100vh; position: relative; overflow-x:hidden; }
-.hero-splash { position: relative; height: 140px; margin-bottom: -60px; overflow:hidden; }
+.app-wrapper { display:flex; flex-direction:column; min-height:100vh; position: relative; }
+.hero-splash { position: relative; height: 140px; margin-bottom: -60px; }
 .hero-splash .halo { position: absolute; border-radius: 999px; filter: blur(40px); opacity: .4; }
 .hero-splash .h1 { width: 340px; height: 160px; top: -40px; left: 12%; background: radial-gradient(circle, rgba(99,102,241,.35), transparent 65%); }
 .hero-splash .h2 { width: 280px; height: 140px; top: -30px; right: 18%; background: radial-gradient(circle, rgba(244,114,182,.28), transparent 68%); animation: drift 10s ease-in-out infinite alternate; }
