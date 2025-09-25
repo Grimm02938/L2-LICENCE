@@ -5,17 +5,15 @@ import Logo from './Logo.vue'
 <template>
   <header class="navbar-container">
     <div class="nav-orbit"></div>
-    <div class="container">
-      <nav class="navbar">
-        <a href="#/" class="brand">
-          <Logo />
-          <span class="brand-text">
-            <span class="brand-title">L2-Licence</span>
-            <span class="brand-sub">Université Paris-Saclay</span>
-          </span>
-        </a>
-      </nav>
-    </div>
+    <nav class="navbar">
+      <a href="#/" class="brand">
+        <Logo />
+        <span class="brand-text">
+          <span class="brand-title">L2-Licence</span>
+          <span class="brand-sub">Université Paris-Saclay</span>
+        </span>
+      </a>
+    </nav>
   </header>
 </template>
 
@@ -25,23 +23,27 @@ import Logo from './Logo.vue'
   top: 0;
   z-index: 30;
   overflow: hidden;
-  background: rgba(7, 11, 23, 0.68);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
   backdrop-filter: blur(22px);
 }
 
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+.navbar-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(15, 23, 42, 0.9), rgba(17, 24, 39, 0.78));
+  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  z-index: -2;
 }
 
 .navbar {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 1rem;
   padding: 1rem 0;
+  width: min(1100px, 100% - 3rem);
+  margin: 0 auto;
 }
 
 .brand {
@@ -98,6 +100,7 @@ import Logo from './Logo.vue'
   .navbar {
     justify-content: center;
     text-align: center;
+    width: calc(100% - 2.5rem);
   }
 
   .brand::after {
@@ -106,10 +109,6 @@ import Logo from './Logo.vue'
 }
 
 @media (max-width: 600px) {
-  .container {
-    padding: 0 1rem;
-  }
-
   .brand {
     gap: 0.6rem;
   }
@@ -121,6 +120,10 @@ import Logo from './Logo.vue'
   .brand-sub {
     font-size: 0.7rem;
     letter-spacing: 0.13em;
+  }
+
+  .navbar {
+    width: calc(100% - 2rem);
   }
 }
 </style>
