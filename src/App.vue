@@ -43,14 +43,15 @@ import CosmicBackground from './shared/CosmicBackground.vue'
 .hero-splash .h3 { width: 520px; height: 120px; bottom: -60px; left: 35%; background: radial-gradient(circle, rgba(14,165,233,.25), transparent 70%); opacity: .28; }
 @keyframes drift { from { transform: translateY(0); } to { transform: translateY(16px); } }
 main { flex:1; padding: 2.4rem 0; }
-.content-layout { display:flex; gap: 2rem; align-items:flex-start; }
+.content-layout { position: relative; display:flex; gap: 2rem; align-items:flex-start; justify-content:center; }
 .utility { display:none; }
-.view { flex:1; min-width:0; }
+.view { flex: 1; min-width:0; max-width: 980px; width: 100%; }
 .footer { background: var(--darker-bg); border-top: 1px solid var(--border-color); padding: 2rem 0 1rem; margin-top: 2rem; }
 .footer-bottom { text-align:center; color: var(--text-secondary); font-size:.9rem; }
 
 @media (min-width: 1100px) {
-  .utility { display:block; }
+  .content-layout { padding-left: 3rem; }
+  .utility { display:block; position:absolute; inset: 0 auto 0 0; width: 3rem; pointer-events:none; }
 }
 
 @media (max-width: 768px) {

@@ -6,18 +6,17 @@
 
 <style scoped>
 .sidebar {
-  position: sticky;
-  top: 96px;
-  width: 220px;
+  width: 100%;
+  height: 100%;
   display: flex;
+  align-items: flex-start;
   justify-content: center;
   padding-top: 0.5rem;
 }
 
 .accent {
   width: 3px;
-  flex-grow: 1;
-  max-height: 460px;
+  height: clamp(220px, 55vh, 460px);
   border-radius: 999px;
   background:
     linear-gradient(180deg, rgba(99, 102, 241, 0.4), rgba(59, 130, 246, 0.1)),

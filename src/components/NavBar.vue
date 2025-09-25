@@ -21,28 +21,30 @@ import Logo from './Logo.vue'
 .navbar-container {
   position: sticky;
   top: 0;
-  z-index: 30;
+  z-index: 40;
   overflow: hidden;
   backdrop-filter: blur(22px);
+  background: rgba(11, 18, 32, 0.85);
 }
 
 .navbar-container::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, rgba(15, 23, 42, 0.9), rgba(17, 24, 39, 0.78));
+  background: linear-gradient(135deg, rgba(11, 18, 32, 0.94), rgba(15, 23, 42, 0.82));
   border-bottom: 1px solid rgba(148, 163, 184, 0.18);
-  z-index: -2;
+  z-index: 0;
 }
 
 .navbar {
   position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 1rem;
   padding: 1rem 0;
-  width: min(1100px, 100% - 3rem);
+  width: min(1200px, 100% - 3rem);
   margin: 0 auto;
 }
 
@@ -93,7 +95,7 @@ import Logo from './Logo.vue'
     radial-gradient(circle at 18% -30%, rgba(99, 102, 241, 0.35), transparent 60%),
     radial-gradient(circle at 92% 12%, rgba(244, 114, 182, 0.25), transparent 55%);
   opacity: 0.55;
-  z-index: -1;
+  z-index: 1;
 }
 
 @media (max-width: 900px) {

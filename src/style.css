@@ -193,9 +193,9 @@ button:focus-visible {
 
 #app {
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  margin: 0;
   text-align: left;
+  position: relative;
 }
 
 .container {
