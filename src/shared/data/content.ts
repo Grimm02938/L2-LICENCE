@@ -20,8 +20,8 @@ const makeCours = (path: string): SectionLink => ({
   url: path,
 })
 
-const placeholder = (label: string): SectionLink => ({
-  label,
+const placeholder = (): SectionLink => ({
+  label: 'Disponible prochainement',
 })
 
 export const contentBySubject: Record<string, Chapter[]> = {
@@ -31,10 +31,10 @@ export const contentBySubject: Record<string, Chapter[]> = {
       semester: 1,
       sections: {
         cours: makeCours('/docs/analyse/chapitre-01-suites-limites.pdf'),
-        td: placeholder('TD disponible bientôt'),
-        tdCorrige: placeholder('Correction à venir'),
-        ds: placeholder('DS à venir'),
-        dsCorrige: placeholder('Corrigé en préparation'),
+        td: placeholder(),
+        tdCorrige: placeholder(),
+        ds: placeholder(),
+        dsCorrige: placeholder(),
       },
     },
     {
@@ -42,10 +42,10 @@ export const contentBySubject: Record<string, Chapter[]> = {
       semester: 1,
       sections: {
         cours: makeCours('/docs/analyse/chapitre-02-derivabilite.pdf'),
-        td: placeholder('TD disponible bientôt'),
-        tdCorrige: placeholder('Correction à venir'),
-        ds: placeholder('DS à venir'),
-        dsCorrige: placeholder('Corrigé en préparation'),
+        td: placeholder(),
+        tdCorrige: placeholder(),
+        ds: placeholder(),
+        dsCorrige: placeholder(),
       },
     },
     {
@@ -53,10 +53,10 @@ export const contentBySubject: Record<string, Chapter[]> = {
       semester: 2,
       sections: {
         cours: makeCours('/docs/analyse/chapitre-03-integration.pdf'),
-        td: placeholder('TD disponible bientôt'),
-        tdCorrige: placeholder('Correction à venir'),
-        ds: placeholder('DS à venir'),
-        dsCorrige: placeholder('Corrigé en préparation'),
+        td: placeholder(),
+        tdCorrige: placeholder(),
+        ds: placeholder(),
+        dsCorrige: placeholder(),
       },
     },
     {
@@ -64,10 +64,10 @@ export const contentBySubject: Record<string, Chapter[]> = {
       semester: 2,
       sections: {
         cours: makeCours('/docs/analyse/chapitre-04-series.pdf'),
-        td: placeholder('TD disponible bientôt'),
-        tdCorrige: placeholder('Correction à venir'),
-        ds: placeholder('DS à venir'),
-        dsCorrige: placeholder('Corrigé en préparation'),
+        td: placeholder(),
+        tdCorrige: placeholder(),
+        ds: placeholder(),
+        dsCorrige: placeholder(),
       },
     },
   ],
@@ -77,10 +77,10 @@ export const contentBySubject: Record<string, Chapter[]> = {
       semester: 1,
       sections: {
         cours: makeCours('/docs/algebre-lineaire/chapitre-01-espaces.pdf'),
-        td: placeholder('TD disponible bientôt'),
-        tdCorrige: placeholder('Correction à venir'),
-        ds: placeholder('DS à venir'),
-        dsCorrige: placeholder('Corrigé en préparation'),
+        td: placeholder(),
+        tdCorrige: placeholder(),
+        ds: placeholder(),
+        dsCorrige: placeholder(),
       },
     },
     {
@@ -88,10 +88,10 @@ export const contentBySubject: Record<string, Chapter[]> = {
       semester: 1,
       sections: {
         cours: makeCours('/docs/algebre-lineaire/chapitre-02-applications.pdf'),
-        td: placeholder('TD disponible bientôt'),
-        tdCorrige: placeholder('Correction à venir'),
-        ds: placeholder('DS à venir'),
-        dsCorrige: placeholder('Corrigé en préparation'),
+        td: placeholder(),
+        tdCorrige: placeholder(),
+        ds: placeholder(),
+        dsCorrige: placeholder(),
       },
     },
     {
@@ -99,10 +99,10 @@ export const contentBySubject: Record<string, Chapter[]> = {
       semester: 2,
       sections: {
         cours: makeCours('/docs/algebre-lineaire/chapitre-03-matrices.pdf'),
-        td: placeholder('TD disponible bientôt'),
-        tdCorrige: placeholder('Correction à venir'),
-        ds: placeholder('DS à venir'),
-        dsCorrige: placeholder('Corrigé en préparation'),
+        td: placeholder(),
+        tdCorrige: placeholder(),
+        ds: placeholder(),
+        dsCorrige: placeholder(),
       },
     },
     {
@@ -110,10 +110,10 @@ export const contentBySubject: Record<string, Chapter[]> = {
       semester: 2,
       sections: {
         cours: makeCours('/docs/algebre-lineaire/chapitre-04-diagonalisation.pdf'),
-        td: placeholder('TD disponible bientôt'),
-        tdCorrige: placeholder('Correction à venir'),
-        ds: placeholder('DS à venir'),
-        dsCorrige: placeholder('Corrigé en préparation'),
+        td: placeholder(),
+        tdCorrige: placeholder(),
+        ds: placeholder(),
+        dsCorrige: placeholder(),
       },
     },
   ],
@@ -123,10 +123,10 @@ export const contentBySubject: Record<string, Chapter[]> = {
       semester: 1,
       sections: {
         cours: makeCours('/docs/arithmetique/chapitre-01-divisibilite.pdf'),
-        td: placeholder('TD disponible bientôt'),
-        tdCorrige: placeholder('Correction à venir'),
-        ds: placeholder('DS à venir'),
-        dsCorrige: placeholder('Corrigé en préparation'),
+        td: placeholder(),
+        tdCorrige: placeholder(),
+        ds: placeholder(),
+        dsCorrige: placeholder(),
       },
     },
     {
@@ -134,10 +134,10 @@ export const contentBySubject: Record<string, Chapter[]> = {
       semester: 1,
       sections: {
         cours: makeCours('/docs/arithmetique/chapitre-02-theoremes.pdf'),
-        td: placeholder('TD disponible bientôt'),
-        tdCorrige: placeholder('Correction à venir'),
-        ds: placeholder('DS à venir'),
-        dsCorrige: placeholder('Corrigé en préparation'),
+        td: placeholder(),
+        tdCorrige: placeholder(),
+        ds: placeholder(),
+        dsCorrige: placeholder(),
       },
     },
     {
@@ -145,10 +145,10 @@ export const contentBySubject: Record<string, Chapter[]> = {
       semester: 2,
       sections: {
         cours: makeCours('/docs/arithmetique/chapitre-03-modulaire.pdf'),
-        td: placeholder('TD disponible bientôt'),
-        tdCorrige: placeholder('Correction à venir'),
-        ds: placeholder('DS à venir'),
-        dsCorrige: placeholder('Corrigé en préparation'),
+        td: placeholder(),
+        tdCorrige: placeholder(),
+        ds: placeholder(),
+        dsCorrige: placeholder(),
       },
     },
   ],
@@ -158,10 +158,10 @@ export const contentBySubject: Record<string, Chapter[]> = {
       semester: 1,
       sections: {
         cours: makeCours('/docs/topologie/chapitre-01-espaces-metriques.pdf'),
-        td: placeholder('TD disponible bientôt'),
-        tdCorrige: placeholder('Correction à venir'),
-        ds: placeholder('DS à venir'),
-        dsCorrige: placeholder('Corrigé en préparation'),
+        td: placeholder(),
+        tdCorrige: placeholder(),
+        ds: placeholder(),
+        dsCorrige: placeholder(),
       },
     },
     {
@@ -169,10 +169,10 @@ export const contentBySubject: Record<string, Chapter[]> = {
       semester: 1,
       sections: {
         cours: makeCours('/docs/topologie/chapitre-02-ouverts.pdf'),
-        td: placeholder('TD disponible bientôt'),
-        tdCorrige: placeholder('Correction à venir'),
-        ds: placeholder('DS à venir'),
-        dsCorrige: placeholder('Corrigé en préparation'),
+        td: placeholder(),
+        tdCorrige: placeholder(),
+        ds: placeholder(),
+        dsCorrige: placeholder(),
       },
     },
     {
@@ -180,10 +180,10 @@ export const contentBySubject: Record<string, Chapter[]> = {
       semester: 2,
       sections: {
         cours: makeCours('/docs/topologie/chapitre-03-continuites.pdf'),
-        td: placeholder('TD disponible bientôt'),
-        tdCorrige: placeholder('Correction à venir'),
-        ds: placeholder('DS à venir'),
-        dsCorrige: placeholder('Corrigé en préparation'),
+        td: placeholder(),
+        tdCorrige: placeholder(),
+        ds: placeholder(),
+        dsCorrige: placeholder(),
       },
     },
   ],
@@ -193,10 +193,10 @@ export const contentBySubject: Record<string, Chapter[]> = {
       semester: 1,
       sections: {
         cours: makeCours('/docs/calcul-numerique/chapitre-01-equations.pdf'),
-        td: placeholder('TD disponible bientôt'),
-        tdCorrige: placeholder('Correction à venir'),
-        ds: placeholder('DS à venir'),
-        dsCorrige: placeholder('Corrigé en préparation'),
+        td: placeholder(),
+        tdCorrige: placeholder(),
+        ds: placeholder(),
+        dsCorrige: placeholder(),
       },
     },
     {
@@ -204,10 +204,10 @@ export const contentBySubject: Record<string, Chapter[]> = {
       semester: 2,
       sections: {
         cours: makeCours('/docs/calcul-numerique/chapitre-02-integration-numerique.pdf'),
-        td: placeholder('TD disponible bientôt'),
-        tdCorrige: placeholder('Correction à venir'),
-        ds: placeholder('DS à venir'),
-        dsCorrige: placeholder('Corrigé en préparation'),
+        td: placeholder(),
+        tdCorrige: placeholder(),
+        ds: placeholder(),
+        dsCorrige: placeholder(),
       },
     },
     {
@@ -215,10 +215,10 @@ export const contentBySubject: Record<string, Chapter[]> = {
       semester: 2,
       sections: {
         cours: makeCours('/docs/calcul-numerique/chapitre-03-iteratives.pdf'),
-        td: placeholder('TD disponible bientôt'),
-        tdCorrige: placeholder('Correction à venir'),
-        ds: placeholder('DS à venir'),
-        dsCorrige: placeholder('Corrigé en préparation'),
+        td: placeholder(),
+        tdCorrige: placeholder(),
+        ds: placeholder(),
+        dsCorrige: placeholder(),
       },
     },
   ],

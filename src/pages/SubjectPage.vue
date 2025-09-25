@@ -50,19 +50,25 @@ function visibleSections(chapter: Chapter) {
 				:accent-hex="subject.accentHex"
 				:accent-rgb="subject.accentRgb"
 			>
-				<div class="rows">
-					<div class="row" v-for="item in visibleSections(ch)" :key="item.meta.key">
-						<span class="label">{{ item.meta.label }}</span>
-						<a
-							v-if="item.section.url"
-							class="chip"
-							:href="item.section.url"
-							target="_blank"
-							rel="noopener"
-						>
-							{{ item.section.label || 'Ouvrir' }}
-						</a>
-						<span v-else class="chip placeholder">{{ item.section.label || 'À venir' }}</span>
+				<div class="resources">
+					<div class="resource" v-for="item in visibleSections(ch)" :key="item.meta.key">
+						<div class="resource-label">
+							<span class="bullet"></span>
+							<span>{{ item.meta.label }}</span>
+						</div>
+						<div class="resource-action">
+							<a
+								v-if="item.section.url"
+								class="resource-link"
+								:href="item.section.url"
+								target="_blank"
+								rel="noopener"
+							>
+								<span>{{ item.section.label || 'Ouvrir' }}</span>
+								<span class="arrow">↗</span>
+							</a>
+							<span v-else class="coming-soon">{{ item.section.label || 'À venir' }}</span>
+						</div>
 					</div>
 				</div>
 			</CollapsiblePanel>
@@ -78,17 +84,20 @@ function visibleSections(chapter: Chapter) {
 .title { display:flex; align-items:center; gap:.75rem }
 .ic { width: 28px; height: 28px }
 .desc { color: var(--text-secondary); margin-bottom: .5rem }
-.chapters { display: grid; gap: 12px; margin-top: 14px }
-.rows { display: grid; gap: .5rem; }
-.row { display:grid; grid-template-columns: 140px minmax(0, 1fr); align-items:center; gap:.55rem; }
-.label { color: var(--text-primary); font-weight: 700; line-height:1.35 }
-.chip { display:inline-flex; align-items:center; justify-content:flex-start; padding: .18rem .55rem; border-radius: 999px; border:1px solid rgba(var(--accent-color), .45); background: rgba(var(--accent-color), .14); color: rgb(var(--accent-color)); font-weight:700; font-size:.85rem; letter-spacing:.01em }
-.chip:hover { background: rgba(var(--accent-color), .2) }
-.chip:focus-visible { outline: 2px solid rgba(var(--accent-color), .6); outline-offset: 2px }
-.chip.placeholder { border-style: dashed; background: rgba(var(--accent-color), .08); color: var(--text-secondary); pointer-events: none; }
+.chapters { display: grid; gap: 16px; margin-top: 18px }
+.resources { display: grid; gap: .65rem; padding: .5rem 0; }
+.resource { display:flex; align-items:center; justify-content:space-between; gap: 1rem; padding: .45rem .6rem; border-radius: 12px; background: rgba(15,23,42,0.65); border:1px solid rgba(var(--accent-color), .18); box-shadow: 0 10px 18px rgba(2,12,34,.18); }
+.resource-label { display:flex; align-items:center; gap:.55rem; font-weight:700; color: var(--text-primary); letter-spacing:.02em; text-transform: uppercase; font-size:.75rem; }
+.resource-label .bullet { width: 8px; height:8px; border-radius:50%; background: rgba(var(--accent-color), .65); box-shadow: 0 0 12px rgba(var(--accent-color), .35); }
+.resource-action { display:flex; align-items:center; }
+.resource-link { display:inline-flex; align-items:center; gap:.4rem; padding:.35rem .75rem; border-radius: 999px; background: rgba(var(--accent-color), .14); color: rgb(var(--accent-color)); font-weight:700; font-size:.85rem; letter-spacing:.05em; text-transform: uppercase; transition: transform .18s ease, background .18s ease; }
+.resource-link .arrow { font-size:.9rem; }
+.resource-link:hover { background: rgba(var(--accent-color), .22); transform: translateY(-1px); }
+.resource-link:focus-visible { outline: 2px solid rgba(var(--accent-color), .6); outline-offset: 2px; }
+.coming-soon { font-size:.82rem; color: rgba(148,163,184,.78); font-style: italic; letter-spacing:.04em; }
 
 @media (max-width: 600px) {
-	.row { grid-template-columns: 1fr; justify-items:flex-start; row-gap:.2rem; }
-	.label { margin-bottom: .05rem; }
+	.resource { flex-direction: column; align-items:flex-start; gap:.45rem; }
+	.resource-link { width: 100%; justify-content: center; }
 }
 </style>
