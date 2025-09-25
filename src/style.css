@@ -262,3 +262,13 @@ body.no-scroll {
       radial-gradient(circle at 82% 18%, rgba(244, 114, 182, 0.05) 0%, transparent 30%);
   }
 }
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  #app {
+    max-width: 100%;
+  }
+}
