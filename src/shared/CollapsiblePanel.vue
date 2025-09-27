@@ -81,13 +81,19 @@ const accentVar = computed(() => {
 	transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
 .panel:hover { transform: translateY(-1px); box-shadow: 0 10px 20px rgba(0,0,0,.3), inset 0 0 0 1px rgba(0,0,0,.15) }
-.header { width:100%; padding:.75rem; display:flex; align-items:center; background:transparent; border:none; color:var(--text-primary); cursor:pointer }
-.pill { display:inline-flex; align-items:center; gap:.5rem; padding:.35rem .6rem; border-radius: 999px; border:1px solid rgba(var(--accent-color), .45); background: rgba(var(--accent-color), .16); color: rgb(var(--accent-color)) }
-.ttl { font-weight:800; text-transform: uppercase; letter-spacing: .02em }
-.caret { opacity:.7; margin-left:.35rem; transition: transform .18s ease }
+.header { width:100%; padding:.75rem; display:flex; align-items:center; justify-content:flex-start; background:transparent; border:none; color:var(--text-primary); cursor:pointer }
+.pill { display:flex; align-items:center; justify-content:flex-start; gap:.6rem; padding:.4rem .7rem; border-radius: 999px; border:1px solid rgba(var(--accent-color), .45); background: rgba(var(--accent-color), .16); color: rgb(var(--accent-color)); flex:1 1 100%; min-width:0; }
+.ttl { font-weight:800; text-transform: uppercase; letter-spacing: .02em; text-align:left; flex:1 1 auto; min-width:0; line-height:1.25; }
+.caret { opacity:.7; margin-left:auto; padding-left:.75rem; transition: transform .18s ease }
 .caret-open { transform: rotate(180deg) }
-.ic { width: 18px; height: 18px }
+.ic { width: 20px; height: 20px; flex: 0 0 20px; }
 .body { padding: 0 1rem 1rem 1rem; color: var(--text-secondary) }
+.header:focus-visible { outline: 2px solid rgba(var(--accent-color), .65); outline-offset: 4px; }
+
+@media (max-width: 640px) {
+	.header { padding: .7rem .6rem; }
+	.pill { flex-wrap: wrap; row-gap: .5rem; }
+}
 
 /* Accent variants map the RGB triplet used by rgba(var(--accent-color), a) */
 .accent-blue { --accent-color: 59 130 246; }

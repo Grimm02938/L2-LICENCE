@@ -13,6 +13,13 @@ function goToSubject(slug: string) {
 <template>
 	<div class="home">
 		<section id="courses">
+		<div class="overview-card">
+			<h2>Présentation</h2>
+			<p>
+				Ce site met à disposition un ensemble structuré de cours, TD et corrections à destination des
+				étudiants de la Licence 2 Mathématiques d'Orsay.
+			</p>
+		</div>
 		<h1>Matières</h1>
 		<div class="panels">
 			<CollapsiblePanel
@@ -40,6 +47,9 @@ function goToSubject(slug: string) {
 
 <style scoped>
 .home { display:flex; flex-direction: column; gap: 2.5rem; }
+.overview-card { background: linear-gradient(135deg, rgba(59,130,246,.12), rgba(14,165,233,.08)); border: 1px solid rgba(148,163,184,.18); border-radius: 18px; padding: 1.25rem 1.5rem; box-shadow: 0 18px 34px rgba(2,12,34,.22); backdrop-filter: blur(8px); display:grid; gap:.45rem; }
+.overview-card h2 { margin:0; font-size:1.1rem; letter-spacing:.12em; text-transform: uppercase; color: rgba(191,219,254,.9); }
+.overview-card p { margin:0; color: rgba(226,232,240,.92); line-height:1.55; max-width: 58ch; }
 .panels { display:flex; flex-direction: column; gap: 1rem; }
 .desc { color: var(--text-secondary); margin: .25rem 0 0; }
 .legal { margin-top: 2rem; font-size: .9rem; color: var(--text-secondary); border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem; line-height: 1.5; }

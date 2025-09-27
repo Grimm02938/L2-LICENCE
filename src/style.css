@@ -21,7 +21,7 @@
   --gradient-1: linear-gradient(135deg, var(--primary), #6366f1);
   --gradient-2: linear-gradient(135deg, var(--accent), #06b6d4);
   --gradient-primary: linear-gradient(90deg, var(--primary), #6366f1);
-  --nav-gradient: linear-gradient(180deg, rgba(7, 15, 33, 0.98) 0%, rgba(6, 11, 24, 0.98) 45%, rgba(10, 18, 39, 0.95) 100%);
+  --nav-gradient: linear-gradient(90deg, #08122a 0%, #132d5b 50%, #08122a 100%);
   --page-gradient: radial-gradient(circle at 18% 12%, rgba(62, 110, 255, 0.16) 0%, transparent 56%),
     radial-gradient(circle at 78% 22%, rgba(43, 86, 210, 0.12) 0%, transparent 54%),
     radial-gradient(circle at 50% 100%, rgba(24, 68, 160, 0.1) 0%, transparent 60%);
@@ -40,7 +40,7 @@
   color-scheme: dark;
   color: var(--text-primary);
   background-color: var(--bg-base);
-  background-image: var(--nav-gradient), var(--page-gradient), var(--noise-texture);
+  background-image: linear-gradient(180deg, rgba(7, 15, 33, 0.98) 0%, rgba(6, 11, 24, 0.98) 45%, rgba(10, 18, 39, 0.95) 100%), var(--page-gradient), var(--noise-texture);
   background-attachment: fixed;
 
   font-synthesis: none;
@@ -81,7 +81,7 @@ a.nav-link:hover::after {
 body {
   margin: 0;
   padding: 0;
-  min-width: 320px;
+  min-width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
@@ -279,6 +279,18 @@ body.no-scroll {
     background-image:
       radial-gradient(circle at 18% 60%, rgba(99, 102, 241, 0.06) 0%, transparent 28%),
       radial-gradient(circle at 82% 18%, rgba(244, 114, 182, 0.05) 0%, transparent 30%);
+  }
+}
+
+@media (max-width: 540px) {
+  :root {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 400px) {
+  :root {
+    font-size: 14px;
   }
 }
 

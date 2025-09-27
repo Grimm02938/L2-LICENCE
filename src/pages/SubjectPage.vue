@@ -11,6 +11,16 @@ const route = useRoute()
 const slug = computed(() => String(route.params.slug || ''))
 const subject = computed(() => subjects.find(s => s.slug === slug.value))
 
+const heroStyle = computed(() => {
+	const fallback = '#3b82f6'
+	const hex = subject.value?.accentHex ?? fallback
+	const rgb = subject.value?.accentRgb ?? '59 130 246'
+	return {
+		'--subject-accent-hex': hex,
+		'--subject-accent-rgb': rgb,
+	}
+})
+
 const chapters = computed(() => contentBySubject[slug.value] || [])
 
 const resourceMeta = [
@@ -35,11 +45,16 @@ function visibleSections(chapter: Chapter) {
 
 <template>
 	<section v-if="subject">
-		<div class="title">
-			<Icon :name="subject.iconKey" class="ic" />
-			<h1>{{ subject.title }}</h1>
+		<div class="subject-hero" :style="heroStyle">
+			<div class="subject-mark">
+				<Icon :name="subject.iconKey" class="ic" />
+			</div>
+			<div class="subject-copy">
+				<p class="subject-kicker">Programme de L2 — {{ subject.category || 'Mathématiques' }}</p>
+				<h1>{{ subject.title }}</h1>
+				<p class="desc">{{ subject.description }}</p>
+			</div>
 		</div>
-		<p class="desc">{{ subject.description }}</p>
 
 		<div class="chapters">
 			<CollapsiblePanel
@@ -81,10 +96,22 @@ function visibleSections(chapter: Chapter) {
 </template>
 
 <style scoped>
-.title { display:flex; align-items:center; gap:.75rem }
-.ic { width: 28px; height: 28px }
-.desc { color: var(--text-secondary); margin-bottom: .5rem }
+.subject-hero { display:flex; align-items:flex-start; gap:1.5rem; padding: 1.5rem 1.8rem; border-radius: 20px; border:1px solid rgba(var(--subject-accent-rgb), .35); background: linear-gradient(135deg, rgba(var(--subject-accent-rgb), .12), rgba(15,23,42,.92)); box-shadow: 0 22px 38px rgba(2, 12, 34, .22); margin-bottom: 1.5rem; position:relative; overflow:hidden; }
+.subject-hero::after { content:''; position:absolute; inset:0; background: radial-gradient(circle at 18% 18%, rgba(var(--subject-accent-rgb), .18), transparent 60%); opacity:.65; pointer-events:none; mix-blend-mode: screen; }
+.subject-mark { width:64px; height:64px; border-radius:18px; display:flex; align-items:center; justify-content:center; background: rgba(var(--subject-accent-rgb), .18); border:1px solid rgba(var(--subject-accent-rgb), .45); box-shadow: inset 0 0 0 1px rgba(255,255,255,.06); flex-shrink:0; }
+.subject-mark .ic { width: 34px; height: 34px; color: var(--text-primary); }
+.subject-copy { display:grid; gap:.4rem; position:relative; z-index:1; }
+.subject-kicker { margin:0; text-transform: uppercase; font-size:.75rem; letter-spacing:.22em; color: rgba(var(--subject-accent-rgb), .9); font-weight:700; }
+.subject-copy h1 { margin:0; font-size: clamp(2rem, 3vw, 2.8rem); }
+.desc { color: rgba(226,232,240,.86); margin:0; line-height:1.5; }
 .chapters { display: grid; gap: 16px; margin-top: 18px }
+
+@media (max-width: 640px) {
+	.subject-hero { flex-direction: column; padding: 1.2rem; gap: 1rem; }
+	.subject-mark { width:56px; height:56px; border-radius:16px; }
+	.subject-mark .ic { width:30px; height:30px; }
+	.subject-copy h1 { font-size: clamp(1.8rem, 7vw, 2.3rem); }
+}
 .resources { display: grid; gap: .65rem; padding: .5rem 0; }
 .resource { display:flex; align-items:center; justify-content:space-between; gap: 1rem; padding: .45rem .6rem; border-radius: 12px; background: rgba(15,23,42,0.65); border:1px solid rgba(var(--accent-color), .18); box-shadow: 0 10px 18px rgba(2,12,34,.18); }
 .resource-label { display:flex; align-items:center; gap:.55rem; font-weight:700; color: var(--text-primary); letter-spacing:.02em; text-transform: uppercase; font-size:.75rem; }
