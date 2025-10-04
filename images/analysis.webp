@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="600" height="300" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ana-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4158D0;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#C850C0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFCC70;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="600" height="300" fill="url(#ana-grad)" />
+  
+  <!-- Decorative Math Symbols -->
+  <text x="50" y="100" font-family="'Courier New', monospace" font-size="20" fill="rgba(255,255,255,0.2)" letter-spacing="5">
+    ∫ ∂ lim dx/dt Σ ∞ ε δ
+  </text>
+  
+  <!-- Decorative Formula -->
+  <g fill="rgba(255,255,255,0.15)">
+    <text x="150" y="150" font-family="'Courier New', monospace" font-size="20">∫ₐᵇ f(x) dx = F(b) - F(a)</text>
+    <text x="150" y="180" font-family="'Courier New', monospace" font-size="20">lim(h→0) [f(x+h) - f(x)]/h</text>
+    <text x="150" y="210" font-family="'Courier New', monospace" font-size="20">Σ(n=1 to ∞) 1/n²</text>
+  </g>
+  
+  <!-- Main Title -->
+  <text x="300" y="150" font-family="'Orbitron', sans-serif" font-size="60" font-weight="bold" fill="white" text-anchor="middle">ANALYSE</text>
+  
+  <!-- Subtitle -->
+  <text x="300" y="180" font-family="'Rajdhani', sans-serif" font-size="20" fill="white" text-anchor="middle">Calcul différentiel &amp; intégral</text>
+</svg>
